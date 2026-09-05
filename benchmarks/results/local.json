@@ -1,0 +1,518 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "python": "3.12.12",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64"
+  },
+  "parameters": {
+    "files_per_profile": 128,
+    "base_size_bytes": 262144,
+    "repeats": 5,
+    "seed": 42
+  },
+  "method": "Fresh process per scan; perf_counter excludes process startup. Peak RSS includes the interpreter. Cold/warm refer to the SQLite cache, not OS disk caches. Fixture generation and warm-cache priming are excluded. Mode order rotates across repetitions.",
+  "profiles": [
+    {
+      "name": "unique-sizes",
+      "total_bytes": 33562688,
+      "samples": {
+        "uncached": [
+          {
+            "seconds": 0.0010368329822085798,
+            "peak_rss_bytes": 22790144,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "seconds": 0.0010420000180602074,
+            "peak_rss_bytes": 22790144,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "seconds": 0.0009845420136116445,
+            "peak_rss_bytes": 22790144,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "seconds": 0.001028291997499764,
+            "peak_rss_bytes": 22790144,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "seconds": 0.0010430000256747007,
+            "peak_rss_bytes": 22740992,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        ],
+        "cold-cache": [
+          {
+            "seconds": 0.0022073330474086106,
+            "peak_rss_bytes": 22921216,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "seconds": 0.002040791034232825,
+            "peak_rss_bytes": 22872064,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "seconds": 0.0022717919782735407,
+            "peak_rss_bytes": 22921216,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "seconds": 0.002605375018902123,
+            "peak_rss_bytes": 22953984,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "seconds": 0.0023018329520709813,
+            "peak_rss_bytes": 22872064,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        ],
+        "warm-cache": [
+          {
+            "seconds": 0.0017592500080354512,
+            "peak_rss_bytes": 22872064,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "seconds": 0.00195591599913314,
+            "peak_rss_bytes": 22904832,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "seconds": 0.0018682500231079757,
+            "peak_rss_bytes": 22953984,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "seconds": 0.0018643339863047004,
+            "peak_rss_bytes": 22904832,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          },
+          {
+            "seconds": 0.0018268749699927866,
+            "peak_rss_bytes": 22872064,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+          }
+        ]
+      },
+      "summary": {
+        "uncached": {
+          "median_seconds": 0.0010368329822085798,
+          "median_peak_rss_bytes": 22790144,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 0
+        },
+        "cold-cache": {
+          "median_seconds": 0.0022717919782735407,
+          "median_peak_rss_bytes": 22921216,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 0
+        },
+        "warm-cache": {
+          "median_seconds": 0.0018643339863047004,
+          "median_peak_rss_bytes": 22904832,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 0
+        }
+      }
+    },
+    {
+      "name": "duplicate-heavy",
+      "total_bytes": 33554432,
+      "samples": {
+        "uncached": [
+          {
+            "seconds": 0.022252333990763873,
+            "peak_rss_bytes": 22921216,
+            "files_hashed": 128,
+            "bytes_hashed": 33554432,
+            "cache_hits": 0,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          },
+          {
+            "seconds": 0.02195374999428168,
+            "peak_rss_bytes": 23003136,
+            "files_hashed": 128,
+            "bytes_hashed": 33554432,
+            "cache_hits": 0,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          },
+          {
+            "seconds": 0.02202400000533089,
+            "peak_rss_bytes": 23068672,
+            "files_hashed": 128,
+            "bytes_hashed": 33554432,
+            "cache_hits": 0,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          },
+          {
+            "seconds": 0.02167516597546637,
+            "peak_rss_bytes": 23003136,
+            "files_hashed": 128,
+            "bytes_hashed": 33554432,
+            "cache_hits": 0,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          },
+          {
+            "seconds": 0.022127166972495615,
+            "peak_rss_bytes": 23019520,
+            "files_hashed": 128,
+            "bytes_hashed": 33554432,
+            "cache_hits": 0,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          }
+        ],
+        "cold-cache": [
+          {
+            "seconds": 0.02774991700425744,
+            "peak_rss_bytes": 23363584,
+            "files_hashed": 128,
+            "bytes_hashed": 33554432,
+            "cache_hits": 0,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          },
+          {
+            "seconds": 0.025945083994884044,
+            "peak_rss_bytes": 23396352,
+            "files_hashed": 128,
+            "bytes_hashed": 33554432,
+            "cache_hits": 0,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          },
+          {
+            "seconds": 0.025584916991647333,
+            "peak_rss_bytes": 23478272,
+            "files_hashed": 128,
+            "bytes_hashed": 33554432,
+            "cache_hits": 0,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          },
+          {
+            "seconds": 0.02531050000106916,
+            "peak_rss_bytes": 23363584,
+            "files_hashed": 128,
+            "bytes_hashed": 33554432,
+            "cache_hits": 0,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          },
+          {
+            "seconds": 0.026214999961666763,
+            "peak_rss_bytes": 23461888,
+            "files_hashed": 128,
+            "bytes_hashed": 33554432,
+            "cache_hits": 0,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          }
+        ],
+        "warm-cache": [
+          {
+            "seconds": 0.010055041988380253,
+            "peak_rss_bytes": 22937600,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 128,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          },
+          {
+            "seconds": 0.009759499982465059,
+            "peak_rss_bytes": 23035904,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 128,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          },
+          {
+            "seconds": 0.009812333039008081,
+            "peak_rss_bytes": 23101440,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 128,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          },
+          {
+            "seconds": 0.009844165993854403,
+            "peak_rss_bytes": 23085056,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 128,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          },
+          {
+            "seconds": 0.009748334006872028,
+            "peak_rss_bytes": 23101440,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 128,
+            "duplicate_groups": 64,
+            "result_digest": "3308e68b5b7555a314a3151ba17088f2dbbb0a605c57f1dc2e74996cf4d3d728"
+          }
+        ]
+      },
+      "summary": {
+        "uncached": {
+          "median_seconds": 0.02202400000533089,
+          "median_peak_rss_bytes": 23003136,
+          "median_bytes_hashed": 33554432,
+          "median_cache_hits": 0
+        },
+        "cold-cache": {
+          "median_seconds": 0.025945083994884044,
+          "median_peak_rss_bytes": 23396352,
+          "median_bytes_hashed": 33554432,
+          "median_cache_hits": 0
+        },
+        "warm-cache": {
+          "median_seconds": 0.009812333039008081,
+          "median_peak_rss_bytes": 23085056,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 128
+        }
+      }
+    },
+    {
+      "name": "mixed",
+      "total_bytes": 33560608,
+      "samples": {
+        "uncached": [
+          {
+            "seconds": 0.011653584020677954,
+            "peak_rss_bytes": 22986752,
+            "files_hashed": 64,
+            "bytes_hashed": 16777216,
+            "cache_hits": 0,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          },
+          {
+            "seconds": 0.011745958006940782,
+            "peak_rss_bytes": 22953984,
+            "files_hashed": 64,
+            "bytes_hashed": 16777216,
+            "cache_hits": 0,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          },
+          {
+            "seconds": 0.011576583026908338,
+            "peak_rss_bytes": 22904832,
+            "files_hashed": 64,
+            "bytes_hashed": 16777216,
+            "cache_hits": 0,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          },
+          {
+            "seconds": 0.011414332955610007,
+            "peak_rss_bytes": 22921216,
+            "files_hashed": 64,
+            "bytes_hashed": 16777216,
+            "cache_hits": 0,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          },
+          {
+            "seconds": 0.011483624984975904,
+            "peak_rss_bytes": 22970368,
+            "files_hashed": 64,
+            "bytes_hashed": 16777216,
+            "cache_hits": 0,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          }
+        ],
+        "cold-cache": [
+          {
+            "seconds": 0.015105832950212061,
+            "peak_rss_bytes": 23363584,
+            "files_hashed": 64,
+            "bytes_hashed": 16777216,
+            "cache_hits": 0,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          },
+          {
+            "seconds": 0.014238292002119124,
+            "peak_rss_bytes": 23396352,
+            "files_hashed": 64,
+            "bytes_hashed": 16777216,
+            "cache_hits": 0,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          },
+          {
+            "seconds": 0.014789708016905934,
+            "peak_rss_bytes": 23363584,
+            "files_hashed": 64,
+            "bytes_hashed": 16777216,
+            "cache_hits": 0,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          },
+          {
+            "seconds": 0.014303207979537547,
+            "peak_rss_bytes": 23314432,
+            "files_hashed": 64,
+            "bytes_hashed": 16777216,
+            "cache_hits": 0,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          },
+          {
+            "seconds": 0.013970458006951958,
+            "peak_rss_bytes": 23379968,
+            "files_hashed": 64,
+            "bytes_hashed": 16777216,
+            "cache_hits": 0,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          }
+        ],
+        "warm-cache": [
+          {
+            "seconds": 0.005935333028901368,
+            "peak_rss_bytes": 22872064,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 64,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          },
+          {
+            "seconds": 0.006019083026330918,
+            "peak_rss_bytes": 23035904,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 64,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          },
+          {
+            "seconds": 0.00579808303155005,
+            "peak_rss_bytes": 22953984,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 64,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          },
+          {
+            "seconds": 0.005946083052549511,
+            "peak_rss_bytes": 22953984,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 64,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          },
+          {
+            "seconds": 0.006158875010441989,
+            "peak_rss_bytes": 23052288,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 64,
+            "duplicate_groups": 32,
+            "result_digest": "1b2a0313456aec8db214d5b2ab41c9894fd32e2cda2bb4b7c82cd89b5e5038fe"
+          }
+        ]
+      },
+      "summary": {
+        "uncached": {
+          "median_seconds": 0.011576583026908338,
+          "median_peak_rss_bytes": 22953984,
+          "median_bytes_hashed": 16777216,
+          "median_cache_hits": 0
+        },
+        "cold-cache": {
+          "median_seconds": 0.014303207979537547,
+          "median_peak_rss_bytes": 23363584,
+          "median_bytes_hashed": 16777216,
+          "median_cache_hits": 0
+        },
+        "warm-cache": {
+          "median_seconds": 0.005946083052549511,
+          "median_peak_rss_bytes": 22953984,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 64
+        }
+      }
+    }
+  ]
+}

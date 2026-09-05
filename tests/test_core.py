@@ -121,20 +121,20 @@ class DuplicateTests(unittest.TestCase):
         self.pair()
         self.write("z.txt")
         report = scan(self.root)
-        original_rename = Path.rename
+        original_link = os.link
         calls = 0
 
-        def interrupted(path, target):
+        def interrupted(path, target, **kwargs):
             nonlocal calls
             calls += 1
             if calls == 2:
                 raise OSError("simulated interruption")
-            return original_rename(path, target)
+            return original_link(path, target, **kwargs)
 
-        with patch.object(Path, "rename", interrupted):
+        with patch("os.link", interrupted):
             with self.assertRaises(SafetyError):
                 quarantine(report)
-        run = next((self.root / ".filekeeper-trash").iterdir())
+        run = next(p for p in (self.root / ".filekeeper-trash").iterdir() if p.is_dir())
         self.assertEqual(restore(run), 1)
         self.assertEqual((self.root / "z.txt").read_bytes(), b"same content")
         self.assertEqual((self.root / "nested/b.txt").read_bytes(), b"same content")

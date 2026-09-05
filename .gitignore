@@ -5,3 +5,7 @@ __pycache__/
 build/
 dist/
 .filekeeper-trash/
+*.sqlite3
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
