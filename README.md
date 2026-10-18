@@ -8,6 +8,8 @@ Cleanup is a preview until you add `--apply`. Quarantine keeps the bytes on disk
 
 The project uses Python 3.11 or newer and has no runtime dependencies. Cleanup, recovery, and benchmarks target macOS and Linux.
 
+![FileKeeper demo finding a duplicate, quarantining it, and restoring the file](docs/images/demo.png)
+
 ## Try it
 
 ```bash
