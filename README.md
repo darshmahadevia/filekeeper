@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/darshmahadevia/filekeeper/actions/workflows/tests.yml/badge.svg)](https://github.com/darshmahadevia/filekeeper/actions/workflows/tests.yml)
 
-FileKeeper finds files with identical contents, even when their names differ. It shows which copy it will keep and can move the extras into a hidden quarantine folder. Each cleanup records the original paths so you can put the files back.
+FileKeeper is a Python CLI that finds duplicate files, quarantines extra copies, and restores them to their original paths.
 
 Cleanup is a preview until you add `--apply`. Quarantine keeps the bytes on disk, so it does not free storage space. There is no permanent-delete command.
 
