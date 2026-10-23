@@ -2,13 +2,18 @@
 
 [![Tests](https://github.com/darshmahadevia/filekeeper/actions/workflows/tests.yml/badge.svg)](https://github.com/darshmahadevia/filekeeper/actions/workflows/tests.yml)
 
-FileKeeper is a Python CLI that finds duplicate files, quarantines extra copies, and restores them to their original paths.
+FileKeeper is a Python CLI that finds duplicate files, quarantines extra copies, and restores them to their original paths. Cleanup is a preview until you add `--apply`.
 
-Cleanup is a preview until you add `--apply`. Quarantine keeps the bytes on disk, so it does not free storage space. There is no permanent-delete command.
+The implementation includes:
 
-The project uses Python 3.11 or newer and has no runtime dependencies. Cleanup, recovery, and benchmarks target macOS and Linux.
+- Size filtering and streaming SHA-256 hashing with a 1 MiB read buffer.
+- An optional SQLite hash cache that checks file identity and metadata before reusing a hash.
+- Restartable quarantine and restore with atomic manifest writes, hard-link reconciliation, and per-root process locks.
+- Optional byte-for-byte verification before cleanup, preserved across interrupted runs.
 
-![FileKeeper demo finding a duplicate, quarantining it, and restoring the file](docs/images/demo.png)
+FileKeeper requires Python 3.11 or newer and has no runtime dependencies. Cleanup, recovery, and benchmarks target macOS and Linux. Quarantine preserves file contents on disk and does not free storage space. There is no permanent-delete command.
+
+![FileKeeper finding a duplicate, quarantining it, and restoring the file](docs/images/demo.png)
 
 ## Try it
 
@@ -18,7 +23,7 @@ cd filekeeper
 python3 demo.py
 ```
 
-The demo creates sample files in a temporary directory, quarantines a duplicate, and restores it. It removes the sample directory when it finishes.
+The demo creates temporary sample files, quarantines a duplicate, restores it, and removes its sample directory.
 
 ```text
 Found 1 duplicate group; 2 files hashed.
@@ -26,7 +31,7 @@ Quarantined duplicates: 0 duplicate groups remain.
 Restored 1 file; all sample files are back.
 ```
 
-You can run every command from the checkout with `python3 -m filekeeper`. To install the shorter `filekeeper` command:
+Run commands from the checkout with `python3 -m filekeeper`. To install the shorter `filekeeper` command:
 
 ```bash
 python3 -m venv .venv
@@ -37,69 +42,66 @@ filekeeper --help
 
 ## Find and quarantine duplicates
 
-Start with a sample folder. Leave its contents unchanged while FileKeeper is working.
+Leave the folder unchanged while FileKeeper is working. Start with a scan and preview:
 
 ```bash
 python3 -m filekeeper scan ./sample-folder
 python3 -m filekeeper clean ./sample-folder
-python3 -m filekeeper clean ./sample-folder --apply
 ```
 
-The first two commands only inspect files. The third moves extra copies into `.filekeeper-trash` and prints the directory for that cleanup run.
-
-FileKeeper sorts the relative paths in each duplicate group and keeps the first one. It does not choose by age or filename meaning. Check the preview before applying it.
-
-For a JSON report:
+To move extra copies into `.filekeeper-trash`, add `--apply`. For an additional streaming byte comparison against the retained copy, add `--verify-bytes`:
 
 ```bash
-python3 -m filekeeper scan ./sample-folder --json
+python3 -m filekeeper clean ./sample-folder --apply --verify-bytes
 ```
 
-Exit codes are `0` for success, `1` for scan or operation errors, and `2` for invalid command arguments.
+FileKeeper keeps the first relative path in each sorted duplicate group. It does not choose by age or filename meaning. Check the preview before applying cleanup. Applied cleanup always rehashes the duplicate and retained file, even when the scan used cached hashes.
 
-## Restore files or finish an interrupted cleanup
+Add `--json` to `scan` or `clean` for a machine-readable report. Exit codes are `0` for success, `1` for scan or operation errors, and `2` for invalid arguments.
 
-Use the run directory printed by cleanup in place of `RUN_ID`:
+## Restore files or finish interrupted cleanup
+
+Applied cleanup prints a run directory. Use that path in place of `RUN_ID`:
 
 ```bash
 python3 -m filekeeper status ./sample-folder/.filekeeper-trash/RUN_ID
 python3 -m filekeeper restore ./sample-folder/.filekeeper-trash/RUN_ID
 ```
 
-`status` prints saved progress and current file locations as JSON. `restore` puts files back without overwriting an existing file.
+`status` reports saved progress and current file locations as JSON. `restore` puts files back without overwriting an existing file.
 
-If cleanup stops partway through, you can finish it:
+To finish interrupted cleanup:
 
 ```bash
 python3 -m filekeeper resume ./sample-folder/.filekeeper-trash/RUN_ID
 ```
 
-You can also use `restore` to undo the partial cleanup. If restoration itself stops, run `restore` again. Once restoration starts, `resume` refuses to restart cleanup. After an abrupt process exit, the run directory remains under `.filekeeper-trash` even if the command never printed it.
+You can also use `restore` to undo partial cleanup. Repeat `restore` if restoration stops. Once restoration starts, `resume` refuses to restart cleanup. An interrupted run preserves its byte-verification setting.
+
+After an abrupt process exit, the run directory remains under `.filekeeper-trash` even if the command never printed it.
 
 ## Cache hashes between scans
 
-Pass a SQLite database path to avoid rereading unchanged candidate files:
+Keep the SQLite database outside the scanned folder:
 
 ```bash
 python3 -m filekeeper scan ./sample-folder --cache ./hashes.sqlite3
 python3 -m filekeeper scan ./sample-folder --cache ./hashes.sqlite3 --json
 ```
 
-Caching is optional. Without `--cache`, scans do not create a database. Keep the database outside the scanned folder. FileKeeper excludes the selected cache and its sidecar files, but a later scan without `--cache` would treat them as ordinary files.
+A cached hash requires matching device, inode, size, modification time, and change time. FileKeeper checks metadata again after lookup. Entries belong to a root and relative path; successful scans prune entries that are no longer candidates.
 
-A cached hash is reused only when the file's device, inode, size, modification time, and change time match. FileKeeper checks those values again after lookup. Each cache entry belongs to a root directory and relative path; successful scans remove entries that are no longer candidates.
+Without `--cache`, a scan creates no database. FileKeeper excludes the selected database and its sidecar files. A later scan without that option would treat them as ordinary files. A corrupt or unsupported cache produces an error; use a new database path to rebuild it.
 
 Reports include `files_hashed`, `bytes_hashed`, and `cache_hits`. Byte counts cover successful content hashing during the scan. They exclude metadata reads, SQLite I/O, and cleanup verification.
 
-Cleanup always rehashes the duplicate and retained copy before moving them, even if the scan used cached hashes. A corrupt or unsupported cache produces an error. Use a new database path to rebuild it.
+## Design and recovery
 
-## How it works
+The scanner groups files by size, then hashes candidates. Unique-size files need no content reads. It skips empty files, symbolic links, repeated hard-link identities, and `.filekeeper-trash` directories.
 
-Files must have the same size to be duplicates. FileKeeper groups by size first, then reads candidates in 1 MiB chunks and compares SHA-256 hashes. Files with unique sizes need no hashing. It skips empty files, symbolic links, repeated hard-link identities, and directories named `.filekeeper-trash`.
+Scanning takes O(N + B) time apart from sorting, where N is the file count and B is the candidate bytes read. It stores O(N) paths and metadata while using a fixed-size hashing buffer.
 
-Scanning takes O(N + B) time apart from sorting, where N is the file count and B is the candidate bytes read. It stores O(N) paths and uses a fixed-size read buffer. Cleanup performs additional content checks.
-
-Before moving files, FileKeeper writes a manifest containing the plan and expected hashes:
+Before cleanup, FileKeeper saves a manifest with the planned paths, expected hashes, and verification policy:
 
 ```text
 sample-folder/
@@ -111,32 +113,38 @@ sample-folder/
             └── 00000000
 ```
 
-Each move creates a hard link at the destination, saves progress, and removes the source name. If the process stops between those steps, both names may point to the same file. Recovery checks their inode identities and finishes the remaining step. Two independent files are a conflict even if their contents match.
+Each move creates a hard link at the destination, syncs its directory, and removes the source name. A process exit can leave both names present. Recovery checks inode identity before finishing the move. Two independent files remain a conflict even when their contents match.
 
-Checkpoints use a flushed temporary file and atomic replacement. A per-root OS lock prevents two FileKeeper operations from changing the same root at once and releases when the process exits. Recovery can read version 1 manifests and upgrades them at the next checkpoint.
+Manifest checkpoints use a flushed temporary file and atomic replacement at operation boundaries. Cleanup writes the full plan three times, so serialized bytes grow linearly with the duplicate count. Recovery reconciles actual locations rather than trusting saved entry states. `status` shows both because saved progress can lag behind file moves.
 
-## Benchmark results
+A per-root POSIX lock prevents competing FileKeeper mutations and releases on process exit. Recovery accepts legacy version 1 and version 2 manifests. See the [design notes](DESIGN.md) for tradeoffs and the [architecture walkthrough](ARCHITECTURE.md) for the code path.
 
-Run the benchmark from the repository root:
+## Measured performance
+
+Measurements use Python 3.12.12 on an Apple M4 with 16 GiB RAM and macOS 27.0.1. Each scan mode has five repetitions in fresh processes. The following duplicate-heavy folders contain paired copies; populated-cache scans hash zero content bytes.
+
+| Folder | OS cache preparation | No hash database, median | Populated hash database, median |
+| --- | --- | ---: | ---: |
+| 20,000 files, 78.1 MiB | Buffered pre-read | 1.925 s | 1.602 s |
+| 2,048 files, 2 GiB | Buffered pre-read | 0.986 s | 0.165 s |
+| 128 files, 4 GiB | Buffered pre-read | 2.073 s | 0.013 s |
+| 2,048 files, 2 GiB | macOS OS-cache eviction | 3.388 s | 0.223 s |
+
+The OS-cold 2 GiB results range from 2.885 to 4.495 seconds without a hash database and 0.220 to 0.228 seconds with a populated database. Each cold sample records a successful `purge` before scanning. Purge time is excluded. Warm and cold runs used separate sessions, so their differences are descriptive comparisons.
+
+Applied cleanup of 1,000 duplicates improved from **7.216 s to 1.173 s median** after removing full-manifest writes for individual moves. Five alternating runs per version ranged from 7.186 to 7.250 seconds before and 1.162 to 1.214 seconds after. A separate profile identified JSON serialization as the original bottleneck. Every run checked all moved files against their retained copies.
+
+The benchmark suite records **180 validated scan samples** across unique-size, duplicate-heavy, and mixed folders, including no database, new database, and populated database modes. Caching helps most when it avoids large content reads; unique-size folders already avoid hashing and can incur extra database overhead. These local results do not establish a general speedup or physical SSD bandwidth.
+
+Reproduce the scans and cleanup comparison:
 
 ```bash
-python3 -m benchmarks.run --files 128 --size-kib 256 --repeats 5 \
-  --output benchmarks/results/local.json
+python3 -m benchmarks.run --scale balanced --repeats 5 --os-cache warm \
+  --output benchmarks/results/balanced-warm.json
+python3 -m benchmarks.cleanup
 ```
 
-It generates repeatable folders and measures each scan in a fresh process. Results include elapsed time, peak process memory, bytes hashed, and cache hits. It checks that every mode returns the same duplicate groups.
-
-These are local measurements on Python 3.12.12, macOS arm64, with 128 files per folder and five repetitions:
-
-| Dataset | Uncached median | First cached median | Repeat cached median | Content bytes, uncached to repeat |
-| --- | ---: | ---: | ---: | ---: |
-| Unique sizes | 1.04 ms | 2.27 ms | 1.86 ms | 0 to 0 |
-| Duplicate-heavy | 22.02 ms | 25.95 ms | 9.81 ms | 32 MiB to 0 |
-| Mixed | 11.58 ms | 14.30 ms | 5.95 ms | 16 MiB to 0 |
-
-Repeat cached scans were about 2.24 times as fast on the duplicate-heavy folder. Caching made the unique-size folder slower because those files already needed no hashing.
-
-These are small workloads on one machine. The benchmark does not clear OS disk caches, and peak memory includes the Python interpreter. See the [methodology and raw samples](benchmarks/README.md) before using the numbers in a comparison.
+The [benchmark guide](benchmarks/README.md) contains all ranges, raw samples, profiling evidence, cold-cache prerequisites, and measurement limits. Scan timing includes traversal, hashing, and SQLite work. It excludes process startup, fixture generation, and cache preparation. Peak RSS includes the interpreter.
 
 ## Tests and source
 
@@ -144,27 +152,26 @@ These are small workloads on one machine. The benchmark does not clear OS disk c
 python3 -m unittest discover -s tests -v
 ```
 
-The 38 tests cover duplicate detection, cache invalidation, file changes, restore conflicts, and manifest validation. Recovery tests force subprocesses to exit after linking, saving a checkpoint, and unlinking. Benchmark tests check fixture contents and matching results across modes.
+The 63 tests cover duplicate detection, cache invalidation, byte verification, restore conflicts, manifest validation, historical symlink paths, and linear manifest write growth. Recovery tests force subprocess exits at link, directory-sync, unlink, and operation-checkpoint boundaries. Benchmark tests check expected content, work counters, cache modes, and eviction failures.
 
 GitHub Actions runs the suite on Linux with Python 3.11, 3.12, and 3.13.
 
-| File | What to look for |
+| File | Responsibility |
 | --- | --- |
 | [core.py](filekeeper/core.py) | Size grouping, cache use, and scan reports |
 | [cache.py](filekeeper/cache.py) | SQLite storage and metadata checks |
-| [fs.py](filekeeper/fs.py) | Path validation and streaming hashes |
+| [fs.py](filekeeper/fs.py) | Path validation, streaming hashes, and byte comparison |
 | [operations.py](filekeeper/operations.py) | Manifests, locks, cleanup, and recovery |
 | [\_\_main\_\_.py](filekeeper/__main__.py) | Command arguments, output, and exit codes |
-| [benchmarks/run.py](benchmarks/run.py) | Dataset generation and measurements |
-
-The [learning guide](LEARNING.md) walks through the code. [Interview notes](RESUME.md) cover the design choices and measured results.
+| [benchmarks/run.py](benchmarks/run.py) | Scan fixtures and measurements |
+| [benchmarks/cleanup.py](benchmarks/cleanup.py) | Cleanup comparison against the pinned baseline |
 
 ## Limits and known issues
 
-Use one local filesystem with hard-link support. Nested mount points can cause moves to fail. The lock coordinates FileKeeper commands using the same root; it does not control other applications or operations on overlapping roots. Checks and filesystem changes are separate steps, so concurrent path changes can still cause races.
-
-Recovery tests cover process exits, not hardware failure or power loss. Renaming the root after cleanup makes the manifest root check fail. `status` does not verify contents or provide a consistent view while another operation is running.
-
-Cached metadata cannot detect a content change that the filesystem does not reflect in those fields. Use an uncached scan when you need fresh reads. Matching SHA-256 hashes count as equal content without a final byte-for-byte comparison. Manifests contain original file paths and should be treated as private if the folder is private.
-
-Two issues from the code review remain open. A completed run can block an unrelated cleanup if a recorded path later becomes a symlink. Also, every checkpoint rewrites the full manifest, so journal writes grow quadratically with the number of duplicates. Both need regression tests before changing the recovery code.
+- Use one local filesystem with hard-link support. Nested mount points can cause moves to fail.
+- The lock coordinates FileKeeper commands on the same root. It does not control other applications or overlapping roots. Path checks and mutations are separate steps, so concurrent changes can race.
+- Recovery tests cover process exits, not power loss or hardware failure. Renaming the root after cleanup makes manifest validation fail.
+- `status` does not verify contents or provide a consistent view during another operation.
+- Cached metadata cannot detect content changes that the filesystem does not reflect in those fields. Use an uncached scan for fresh reads.
+- Matching SHA-256 hashes count as equal content by default. `--verify-bytes` adds a comparison but does not prevent concurrent changes.
+- Manifests record original paths. Treat them as private when the folder is private.

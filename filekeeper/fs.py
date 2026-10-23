@@ -47,3 +47,31 @@ def safe_path(root, relative):
         raise SafetyError(f"Path leaves root: {path}")
     return path
 
+
+def same_bytes(left, right):
+    """Compare stable regular files with bounded memory and no symlink following."""
+    before = [fingerprint(path) for path in (left, right)]
+    flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+    equal = True
+    with os.fdopen(os.open(left, flags), "rb") as first:
+        with os.fdopen(os.open(right, flags), "rb") as second:
+            for stream, expected in zip((first, second), before):
+                info = os.fstat(stream.fileno())
+                actual = (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns)
+                if actual != expected:
+                    raise SafetyError("File changed before byte comparison")
+            while True:
+                a, b = first.read(CHUNK), second.read(CHUNK)
+                if a != b:
+                    equal = False
+                    break
+                if not a:
+                    break
+            for stream, expected in zip((first, second), before):
+                info = os.fstat(stream.fileno())
+                actual = (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns)
+                if actual != expected:
+                    raise SafetyError("File changed during byte comparison")
+    if [fingerprint(path) for path in (left, right)] != before:
+        raise SafetyError("File changed during byte comparison")
+    return equal

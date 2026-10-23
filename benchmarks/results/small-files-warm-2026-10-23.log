@@ -1,0 +1,13 @@
+COMMAND /Users/darshm/.pyenv/versions/3.12.12/bin/python3 -m benchmarks.run --scale small-files --repeats 5 --os-cache warm --output benchmarks/results/small-files-warm-2026-10-23.json
+unique-sizes
+  os-warm/hash-none            0.162091s [0.160582, 0.181982]  0 bytes hashed  50.8 MiB peak RSS
+  os-warm/hash-empty           0.162214s [0.160874, 0.164877]  0 bytes hashed  51.2 MiB peak RSS
+  os-warm/hash-populated       0.161455s [0.160425, 0.166286]  0 bytes hashed  51.2 MiB peak RSS
+duplicate-heavy
+  os-warm/hash-none            1.925200s [1.917318, 2.049958]  81,920,000 bytes hashed  55.0 MiB peak RSS
+  os-warm/hash-empty           2.059313s [2.041045, 2.162445]  81,920,000 bytes hashed  66.0 MiB peak RSS
+  os-warm/hash-populated       1.602121s [1.588787, 1.899048]  0 bytes hashed  65.8 MiB peak RSS
+mixed
+  os-warm/hash-none            1.039738s [1.018501, 1.073281]  40,960,000 bytes hashed  51.5 MiB peak RSS
+  os-warm/hash-empty           1.124417s [1.095924, 1.153808]  40,960,000 bytes hashed  56.3 MiB peak RSS
+  os-warm/hash-populated       0.882400s [0.877652, 0.940362]  0 bytes hashed  56.4 MiB peak RSS

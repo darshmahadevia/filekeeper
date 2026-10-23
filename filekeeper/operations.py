@@ -4,7 +4,7 @@ import os
 import uuid
 from contextlib import contextmanager
 from pathlib import Path
-from .fs import SafetyError, digest, safe_path
+from .fs import SafetyError, digest, safe_path, same_bytes
 
 TRASH = ".filekeeper-trash"
 PHASES = {"quarantining", "quarantined", "restoring", "restored"}
@@ -52,7 +52,7 @@ def _save(run, data):
         temporary.unlink(missing_ok=True)
 
 
-def _load(folder):
+def _load(folder, *, validate_paths=True):
     given = Path(folder).absolute()
     run = given.resolve(strict=True)
     if run.parent.name != TRASH:
@@ -68,6 +68,8 @@ def _load(folder):
             data = dict(data, version=2, phase="quarantining")
         if data["phase"] not in PHASES or not isinstance(data["entries"], list):
             raise SafetyError("Invalid operation phase or entries")
+        if not isinstance(data.get("verify_bytes", False), bool):
+            raise SafetyError("Invalid byte verification policy")
         originals, stored_names = set(), set()
         for entry in data["entries"]:
             original = Path(entry["original"])
@@ -77,9 +79,13 @@ def _load(folder):
                     or len(stored.parts) != 2 or stored.parts[0] != "files"
                     or len(stored.name) != 8 or not stored.name.isascii() or not stored.name.isdecimal()):
                 raise SafetyError("Invalid manifest path")
-            safe_path(root, original)
-            safe_path(root, keeper)
-            safe_path(root, (run / stored).relative_to(root))
+            for path in (original, keeper):
+                if path.is_absolute() or not path.parts or ".." in path.parts:
+                    raise SafetyError("Invalid manifest path")
+            if validate_paths:
+                safe_path(root, original)
+                safe_path(root, keeper)
+                safe_path(root, (run / stored).relative_to(root))
             if str(original) in originals or str(stored) in stored_names:
                 raise SafetyError("Duplicate manifest entry")
             originals.add(str(original))
@@ -103,7 +109,7 @@ def _paths(root, run, entry):
             safe_path(root, (run / entry["stored"]).relative_to(root)))
 
 
-def _check(root, run, entry, direction):
+def _check(root, run, entry, direction, verify_bytes=False):
     original, stored = _paths(root, run, entry)
     has_original, has_stored = original.exists(), stored.exists()
     if not has_original and not has_stored:
@@ -117,6 +123,8 @@ def _check(root, run, entry, direction):
         keeper = safe_path(root, entry["keep"])
         if digest(keeper) != entry["sha256"]:
             raise SafetyError(f"Retained copy changed: {keeper}")
+        if verify_bytes and not same_bytes(original, keeper):
+            raise SafetyError(f"Byte comparison failed: {original}")
     return original, stored, has_original, has_stored
 
 
@@ -126,12 +134,12 @@ def _execute(root, run, data, direction):
     # Validate the entire plan before beginning new changes. The filesystem, not
     # a possibly stale checkpoint, determines which half of a move remains.
     for entry in data["entries"]:
-        _check(root, run, entry, direction)
+        _check(root, run, entry, direction, data.get("verify_bytes", False))
     data["phase"] = direction
     _save(run, data)
     changed = 0
     for entry in data["entries"]:
-        original, stored, has_original, has_stored = _check(root, run, entry, direction)
+        original, stored, has_original, has_stored = _check(root, run, entry, direction, data.get("verify_bytes", False))
         source, destination = (original, stored) if direction == "quarantining" else (stored, original)
         source_exists = has_original if direction == "quarantining" else has_stored
         destination_exists = has_stored if direction == "quarantining" else has_original
@@ -141,8 +149,6 @@ def _execute(root, run, data, direction):
                 safe_path(root, destination.relative_to(root))
                 os.link(source, destination, follow_symlinks=False)
                 _sync(destination.parent)
-            entry["state"] = "linked"
-            _save(run, data)
             # Recheck identity before deleting a name. Independent equal-content
             # files are a conflict; only two names for this same inode are safe.
             safe_path(root, source.relative_to(root))
@@ -153,13 +159,14 @@ def _execute(root, run, data, direction):
             _sync(source.parent)
             changed += 1
         entry["state"] = "quarantined" if direction == "quarantining" else "restored"
-        _save(run, data)
     data["phase"] = "quarantined" if direction == "quarantining" else "restored"
     _save(run, data)
     return changed
 
 
-def quarantine(report):
+def quarantine(report, *, verify_bytes=False):
+    if not isinstance(verify_bytes, bool):
+        raise ValueError("verify_bytes must be a boolean")
     if report["errors"]:
         raise SafetyError("Scan had errors. Resolve them before quarantining files.")
     root = Path(report["root"]).resolve(strict=True)
@@ -178,14 +185,16 @@ def quarantine(report):
     with _lock(root):
         # Avoid starting another operation while a previous run needs recovery.
         for manifest in (root / TRASH).glob("*/manifest.json"):
-            _, _, previous = _load(manifest.parent)
+            _, _, previous = _load(manifest.parent, validate_paths=False)
             if previous["phase"] in {"quarantining", "restoring"}:
                 raise SafetyError(f"Recover the unfinished run first: {manifest.parent}")
         run = root / TRASH / uuid.uuid4().hex
         run.mkdir(mode=0o700)
         (run / "files").mkdir()
-        data = {"version": 2, "root": str(root), "phase": "quarantining", "entries": entries}
+        data = {"version": 2, "root": str(root), "phase": "quarantining", "entries": entries,
+                "verify_bytes": verify_bytes}
         _save(run, data)
+        _sync(run.parent)
         try:
             _execute(root, run, data, "quarantining")
         except (OSError, SafetyError) as exc:

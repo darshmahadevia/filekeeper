@@ -1,0 +1,13 @@
+COMMAND /Users/darshm/.pyenv/versions/3.12.12/bin/python3 -m benchmarks.run --scale large-files --repeats 5 --os-cache warm --output benchmarks/results/large-files-warm-2026-10-23.json
+unique-sizes
+  os-warm/hash-none            0.002185s [0.001930, 0.002543]  0 bytes hashed  23.5 MiB peak RSS
+  os-warm/hash-empty           0.003913s [0.003310, 0.004562]  0 bytes hashed  24.5 MiB peak RSS
+  os-warm/hash-populated       0.002697s [0.002574, 0.003228]  0 bytes hashed  24.5 MiB peak RSS
+duplicate-heavy
+  os-warm/hash-none            2.072564s [2.005848, 3.181159]  4,294,967,296 bytes hashed  24.0 MiB peak RSS
+  os-warm/hash-empty           2.073188s [1.936664, 3.648657]  4,294,967,296 bytes hashed  23.5 MiB peak RSS
+  os-warm/hash-populated       0.012591s [0.012126, 0.013052]  0 bytes hashed  23.5 MiB peak RSS
+mixed
+  os-warm/hash-none            1.107456s [1.072735, 1.127040]  2,147,483,648 bytes hashed  23.5 MiB peak RSS
+  os-warm/hash-empty           1.137514s [1.109406, 1.193607]  2,147,483,648 bytes hashed  24.9 MiB peak RSS
+  os-warm/hash-populated       0.007426s [0.007158, 0.007703]  0 bytes hashed  23.8 MiB peak RSS

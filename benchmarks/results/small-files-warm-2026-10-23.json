@@ -1,0 +1,1186 @@
+{
+  "schema_version": 2,
+  "environment": {
+    "python": "3.12.12",
+    "executable": "/Users/darshm/.pyenv/versions/3.12.12/bin/python3",
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "cpu_count": 10,
+    "load_average": [
+      3.0888671875,
+      3.3251953125,
+      3.3671875
+    ],
+    "utc": "2026-10-23T18:08:03.423823+00:00",
+    "git_head": "38b654050f26de074ee51fe809b601e3aae57d82",
+    "git_status": "D LEARNING.md\n M README.md\n D RESUME.md\n M benchmarks/README.md\n M benchmarks/run.py\n M filekeeper/__main__.py\n M filekeeper/fs.py\n M filekeeper/operations.py\n M tests/test_benchmarks.py\n M tests/test_recovery.py\n?? .DS_Store\n?? .audit/\n?? ARCHITECTURE.md\n?? DESIGN.md\n?? benchmarks/cleanup_impl_measure.py\n?? benchmarks/cleanup_impl_profile.json\n?? benchmarks/cleanup_impl_results.json\n?? benchmarks/results/os-cold-permission-2026-10-23.json\n?? tests/test_verify_bytes.py",
+    "source_sha256": {
+      "benchmarks/run.py": "436aa692712e6d349720aebc1a5f413222e09e36815255b3db3c94d1a751cc9c",
+      "filekeeper/core.py": "7d1bda4d28123833a00a5ab1db40bac419c0b55eb0d5a1f8c04e58a16a3a03fa",
+      "filekeeper/cache.py": "f8d69353aca8e8489cd56c9c9dc52ca915bcec5ecbc756104ab48ccdcf05b4d2",
+      "filekeeper/fs.py": "90450fcfc66f5f9c10090c510dfa378f166f8e3df67ac06c6d661592f2ad2393"
+    },
+    "memory_bytes": 17179869184,
+    "temporary_volume_free_bytes": 29377462272,
+    "load_average_end": [
+      3.11865234375,
+      3.267578125,
+      3.33447265625
+    ],
+    "utc_end": "2026-10-23T18:09:48.632154+00:00"
+  },
+  "parameters": {
+    "scale": "small-files",
+    "files_per_profile": 20000,
+    "base_size_bytes": 4096,
+    "repeats": 5,
+    "seed": 42,
+    "os_caches": [
+      "warm"
+    ]
+  },
+  "repro_command": [
+    "/Users/darshm/.pyenv/versions/3.12.12/bin/python3",
+    "-m",
+    "benchmarks.run",
+    "--scale",
+    "small-files",
+    "--repeats",
+    "5",
+    "--os-cache",
+    "warm",
+    "--output",
+    "benchmarks/results/small-files-warm-2026-10-23.json"
+  ],
+  "method": "Fresh process per scan; scan timer excludes imports, fixture generation, SQLite priming, and OS cache preparation. Warm is a buffered pre-read, not guaranteed residency. Cold is successful macOS system-wide purge or Linux sync plus drop_caches=3 before each timed scan. Hash caches are independently none, empty, populated. Mode order rotates each repetition. RSS includes interpreter and OS preparation. Expected content groups come from fixture generation, not a reference scan.",
+  "profiles": [
+    {
+      "name": "unique-sizes",
+      "total_bytes": 281930000,
+      "expected": {
+        "files_scanned": 20000,
+        "files_hashed": 0,
+        "bytes_hashed": 0,
+        "duplicate_groups": 0,
+        "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "duplicate_bytes": 0
+      },
+      "samples": {
+        "os-warm/hash-none": [
+          {
+            "seconds": 0.1605818329990143,
+            "user_cpu_seconds": 0.12004799999999999,
+            "system_cpu_seconds": 0.040485999999999966,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53100544,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281930000,
+              "seconds": 0.4955188339954475
+            },
+            "repeat": 0,
+            "order": 0
+          },
+          {
+            "seconds": 0.16203133299859473,
+            "user_cpu_seconds": 0.12137400000000001,
+            "system_cpu_seconds": 0.04059200000000002,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53264384,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281930000,
+              "seconds": 0.5018794169955072
+            },
+            "repeat": 1,
+            "order": 2
+          },
+          {
+            "seconds": 0.18198179199680453,
+            "user_cpu_seconds": 0.131848,
+            "system_cpu_seconds": 0.04551499999999997,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53280768,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281930000,
+              "seconds": 0.5821368749966496
+            },
+            "repeat": 2,
+            "order": 1
+          },
+          {
+            "seconds": 0.16209145799803082,
+            "user_cpu_seconds": 0.12140699999999999,
+            "system_cpu_seconds": 0.040581000000000034,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53297152,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281930000,
+              "seconds": 0.6017704170008074
+            },
+            "repeat": 3,
+            "order": 0
+          },
+          {
+            "seconds": 0.16370870800164994,
+            "user_cpu_seconds": 0.12254999999999996,
+            "system_cpu_seconds": 0.04106899999999997,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53264384,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281930000,
+              "seconds": 0.5997134579956764
+            },
+            "repeat": 4,
+            "order": 2
+          }
+        ],
+        "os-warm/hash-empty": [
+          {
+            "seconds": 0.16087437500391388,
+            "user_cpu_seconds": 0.11998299999999998,
+            "system_cpu_seconds": 0.04045599999999999,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53624832,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281930000,
+              "seconds": 0.4940042089947383
+            },
+            "repeat": 0,
+            "order": 1
+          },
+          {
+            "seconds": 0.16404358299769228,
+            "user_cpu_seconds": 0.12281500000000001,
+            "system_cpu_seconds": 0.04066200000000003,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53608448,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281930000,
+              "seconds": 0.4945452089959872
+            },
+            "repeat": 1,
+            "order": 0
+          },
+          {
+            "seconds": 0.16487691700604046,
+            "user_cpu_seconds": 0.121863,
+            "system_cpu_seconds": 0.04250400000000004,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53690368,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281930000,
+              "seconds": 0.6037337910020142
+            },
+            "repeat": 2,
+            "order": 2
+          },
+          {
+            "seconds": 0.16213849999621743,
+            "user_cpu_seconds": 0.12029499999999999,
+            "system_cpu_seconds": 0.041321,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53641216,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281930000,
+              "seconds": 0.5874973329991917
+            },
+            "repeat": 3,
+            "order": 1
+          },
+          {
+            "seconds": 0.16221387500263518,
+            "user_cpu_seconds": 0.12121799999999999,
+            "system_cpu_seconds": 0.040812000000000015,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53723136,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281930000,
+              "seconds": 0.5994258749997243
+            },
+            "repeat": 4,
+            "order": 0
+          }
+        ],
+        "os-warm/hash-populated": [
+          {
+            "seconds": 0.16145504199812422,
+            "user_cpu_seconds": 0.12060900000000002,
+            "system_cpu_seconds": 0.040483999999999964,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53641216,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281942288,
+              "seconds": 0.4969209589980892
+            },
+            "repeat": 0,
+            "order": 2
+          },
+          {
+            "seconds": 0.16076079099730123,
+            "user_cpu_seconds": 0.120338,
+            "system_cpu_seconds": 0.0403,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53542912,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281942288,
+              "seconds": 0.498522583002341
+            },
+            "repeat": 1,
+            "order": 1
+          },
+          {
+            "seconds": 0.16042545899836114,
+            "user_cpu_seconds": 0.12016299999999999,
+            "system_cpu_seconds": 0.03992399999999996,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53641216,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281942288,
+              "seconds": 0.5032810830016388
+            },
+            "repeat": 2,
+            "order": 0
+          },
+          {
+            "seconds": 0.1633907920040656,
+            "user_cpu_seconds": 0.12120300000000003,
+            "system_cpu_seconds": 0.04198400000000002,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53592064,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281942288,
+              "seconds": 0.592380583002523
+            },
+            "repeat": 3,
+            "order": 2
+          },
+          {
+            "seconds": 0.16628649999620393,
+            "user_cpu_seconds": 0.12382199999999999,
+            "system_cpu_seconds": 0.04224300000000003,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53690368,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 281942288,
+              "seconds": 0.5278968749989872
+            },
+            "repeat": 4,
+            "order": 1
+          }
+        ]
+      },
+      "summary": {
+        "os-warm/hash-none": {
+          "median_seconds": 0.16209145799803082,
+          "min_seconds": 0.1605818329990143,
+          "max_seconds": 0.18198179199680453,
+          "median_peak_rss_bytes": 53264384,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 0
+        },
+        "os-warm/hash-empty": {
+          "median_seconds": 0.16221387500263518,
+          "min_seconds": 0.16087437500391388,
+          "max_seconds": 0.16487691700604046,
+          "median_peak_rss_bytes": 53641216,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 0
+        },
+        "os-warm/hash-populated": {
+          "median_seconds": 0.16145504199812422,
+          "min_seconds": 0.16042545899836114,
+          "max_seconds": 0.16628649999620393,
+          "median_peak_rss_bytes": 53641216,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 0
+        }
+      }
+    },
+    {
+      "name": "duplicate-heavy",
+      "total_bytes": 81920000,
+      "expected": {
+        "files_scanned": 20000,
+        "files_hashed": 20000,
+        "bytes_hashed": 81920000,
+        "duplicate_groups": 10000,
+        "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+        "duplicate_bytes": 40960000
+      },
+      "samples": {
+        "os-warm/hash-none": [
+          {
+            "seconds": 1.9173179169956711,
+            "user_cpu_seconds": 1.279547,
+            "system_cpu_seconds": 0.6369370000000001,
+            "input_blocks": 0,
+            "peak_rss_bytes": 57704448,
+            "files_scanned": 20000,
+            "files_hashed": 20000,
+            "bytes_hashed": 81920000,
+            "cache_hits": 0,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 81920000,
+              "seconds": 0.567905541996879
+            },
+            "repeat": 0,
+            "order": 0
+          },
+          {
+            "seconds": 1.92497791700589,
+            "user_cpu_seconds": 1.286006,
+            "system_cpu_seconds": 0.6382859999999999,
+            "input_blocks": 0,
+            "peak_rss_bytes": 57884672,
+            "files_scanned": 20000,
+            "files_hashed": 20000,
+            "bytes_hashed": 81920000,
+            "cache_hits": 0,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 81920000,
+              "seconds": 0.48200116700172657
+            },
+            "repeat": 1,
+            "order": 2
+          },
+          {
+            "seconds": 1.965690832999826,
+            "user_cpu_seconds": 1.272667,
+            "system_cpu_seconds": 0.6923990000000001,
+            "input_blocks": 0,
+            "peak_rss_bytes": 57655296,
+            "files_scanned": 20000,
+            "files_hashed": 20000,
+            "bytes_hashed": 81920000,
+            "cache_hits": 0,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 81920000,
+              "seconds": 0.5840627910001785
+            },
+            "repeat": 2,
+            "order": 1
+          },
+          {
+            "seconds": 1.9252000419946853,
+            "user_cpu_seconds": 1.278967,
+            "system_cpu_seconds": 0.6451560000000001,
+            "input_blocks": 0,
+            "peak_rss_bytes": 57786368,
+            "files_scanned": 20000,
+            "files_hashed": 20000,
+            "bytes_hashed": 81920000,
+            "cache_hits": 0,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 81920000,
+              "seconds": 0.48615662500378676
+            },
+            "repeat": 3,
+            "order": 0
+          },
+          {
+            "seconds": 2.049958208001044,
+            "user_cpu_seconds": 1.29942,
+            "system_cpu_seconds": 0.7470849999999999,
+            "input_blocks": 0,
+            "peak_rss_bytes": 57720832,
+            "files_scanned": 20000,
+            "files_hashed": 20000,
+            "bytes_hashed": 81920000,
+            "cache_hits": 0,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 81920000,
+              "seconds": 0.5876348340025288
+            },
+            "repeat": 4,
+            "order": 2
+          }
+        ],
+        "os-warm/hash-empty": [
+          {
+            "seconds": 2.1624453749973327,
+            "user_cpu_seconds": 1.421675,
+            "system_cpu_seconds": 0.7371129999999999,
+            "input_blocks": 0,
+            "peak_rss_bytes": 69238784,
+            "files_scanned": 20000,
+            "files_hashed": 20000,
+            "bytes_hashed": 81920000,
+            "cache_hits": 0,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 81920000,
+              "seconds": 0.48589895800250815
+            },
+            "repeat": 0,
+            "order": 1
+          },
+          {
+            "seconds": 2.129744792000565,
+            "user_cpu_seconds": 1.402148,
+            "system_cpu_seconds": 0.667574,
+            "input_blocks": 0,
+            "peak_rss_bytes": 69222400,
+            "files_scanned": 20000,
+            "files_hashed": 20000,
+            "bytes_hashed": 81920000,
+            "cache_hits": 0,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 81920000,
+              "seconds": 0.5610859589942265
+            },
+            "repeat": 1,
+            "order": 0
+          },
+          {
+            "seconds": 2.0410446249952656,
+            "user_cpu_seconds": 1.390802,
+            "system_cpu_seconds": 0.6466120000000002,
+            "input_blocks": 0,
+            "peak_rss_bytes": 69189632,
+            "files_scanned": 20000,
+            "files_hashed": 20000,
+            "bytes_hashed": 81920000,
+            "cache_hits": 0,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 81920000,
+              "seconds": 0.4847485840000445
+            },
+            "repeat": 2,
+            "order": 2
+          },
+          {
+            "seconds": 2.058712457997899,
+            "user_cpu_seconds": 1.3948079999999998,
+            "system_cpu_seconds": 0.659171,
+            "input_blocks": 0,
+            "peak_rss_bytes": 69255168,
+            "files_scanned": 20000,
+            "files_hashed": 20000,
+            "bytes_hashed": 81920000,
+            "cache_hits": 0,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 81920000,
+              "seconds": 0.48665420900215395
+            },
+            "repeat": 3,
+            "order": 1
+          },
+          {
+            "seconds": 2.059312958001101,
+            "user_cpu_seconds": 1.3997469999999999,
+            "system_cpu_seconds": 0.652663,
+            "input_blocks": 0,
+            "peak_rss_bytes": 69107712,
+            "files_scanned": 20000,
+            "files_hashed": 20000,
+            "bytes_hashed": 81920000,
+            "cache_hits": 0,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 81920000,
+              "seconds": 0.5215512499999022
+            },
+            "repeat": 4,
+            "order": 0
+          }
+        ],
+        "os-warm/hash-populated": [
+          {
+            "seconds": 1.5988062920005177,
+            "user_cpu_seconds": 1.2626249999999999,
+            "system_cpu_seconds": 0.334988,
+            "input_blocks": 0,
+            "peak_rss_bytes": 69107712,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 20000,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 90333184,
+              "seconds": 0.5829632919994765
+            },
+            "repeat": 0,
+            "order": 2
+          },
+          {
+            "seconds": 1.588786959000572,
+            "user_cpu_seconds": 1.256882,
+            "system_cpu_seconds": 0.331255,
+            "input_blocks": 0,
+            "peak_rss_bytes": 69124096,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 20000,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 90333184,
+              "seconds": 0.48865970900078537
+            },
+            "repeat": 1,
+            "order": 1
+          },
+          {
+            "seconds": 1.6021207910016528,
+            "user_cpu_seconds": 1.262364,
+            "system_cpu_seconds": 0.338479,
+            "input_blocks": 0,
+            "peak_rss_bytes": 68993024,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 20000,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 90333184,
+              "seconds": 0.5998116670016316
+            },
+            "repeat": 2,
+            "order": 0
+          },
+          {
+            "seconds": 1.6614038340048864,
+            "user_cpu_seconds": 1.302187,
+            "system_cpu_seconds": 0.350838,
+            "input_blocks": 0,
+            "peak_rss_bytes": 69042176,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 20000,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 90333184,
+              "seconds": 0.5784060840014718
+            },
+            "repeat": 3,
+            "order": 2
+          },
+          {
+            "seconds": 1.8990476250037318,
+            "user_cpu_seconds": 1.4112129999999998,
+            "system_cpu_seconds": 0.43643299999999996,
+            "input_blocks": 0,
+            "peak_rss_bytes": 61358080,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 20000,
+            "duplicate_bytes": 40960000,
+            "errors": 0,
+            "duplicate_groups": 10000,
+            "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 90333184,
+              "seconds": 0.5053111249944777
+            },
+            "repeat": 4,
+            "order": 1
+          }
+        ]
+      },
+      "summary": {
+        "os-warm/hash-none": {
+          "median_seconds": 1.9252000419946853,
+          "min_seconds": 1.9173179169956711,
+          "max_seconds": 2.049958208001044,
+          "median_peak_rss_bytes": 57720832,
+          "median_bytes_hashed": 81920000,
+          "median_cache_hits": 0
+        },
+        "os-warm/hash-empty": {
+          "median_seconds": 2.059312958001101,
+          "min_seconds": 2.0410446249952656,
+          "max_seconds": 2.1624453749973327,
+          "median_peak_rss_bytes": 69222400,
+          "median_bytes_hashed": 81920000,
+          "median_cache_hits": 0
+        },
+        "os-warm/hash-populated": {
+          "median_seconds": 1.6021207910016528,
+          "min_seconds": 1.588786959000572,
+          "max_seconds": 1.8990476250037318,
+          "median_peak_rss_bytes": 69042176,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 20000
+        }
+      }
+    },
+    {
+      "name": "mixed",
+      "total_bytes": 231925000,
+      "expected": {
+        "files_scanned": 20000,
+        "files_hashed": 10000,
+        "bytes_hashed": 40960000,
+        "duplicate_groups": 5000,
+        "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+        "duplicate_bytes": 20480000
+      },
+      "samples": {
+        "os-warm/hash-none": [
+          {
+            "seconds": 1.0185009589986294,
+            "user_cpu_seconds": 0.691034,
+            "system_cpu_seconds": 0.32730499999999996,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53968896,
+            "files_scanned": 20000,
+            "files_hashed": 10000,
+            "bytes_hashed": 40960000,
+            "cache_hits": 0,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 231925000,
+              "seconds": 0.5246664169972064
+            },
+            "repeat": 0,
+            "order": 0
+          },
+          {
+            "seconds": 1.036411583001609,
+            "user_cpu_seconds": 0.699398,
+            "system_cpu_seconds": 0.335771,
+            "input_blocks": 0,
+            "peak_rss_bytes": 53968896,
+            "files_scanned": 20000,
+            "files_hashed": 10000,
+            "bytes_hashed": 40960000,
+            "cache_hits": 0,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 231925000,
+              "seconds": 0.48626170799980173
+            },
+            "repeat": 1,
+            "order": 2
+          },
+          {
+            "seconds": 1.0732809999972233,
+            "user_cpu_seconds": 0.7010259999999999,
+            "system_cpu_seconds": 0.37094499999999997,
+            "input_blocks": 0,
+            "peak_rss_bytes": 54034432,
+            "files_scanned": 20000,
+            "files_hashed": 10000,
+            "bytes_hashed": 40960000,
+            "cache_hits": 0,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 231925000,
+              "seconds": 0.5923491249996005
+            },
+            "repeat": 2,
+            "order": 1
+          },
+          {
+            "seconds": 1.0431496249948395,
+            "user_cpu_seconds": 0.703334,
+            "system_cpu_seconds": 0.33920999999999996,
+            "input_blocks": 0,
+            "peak_rss_bytes": 54001664,
+            "files_scanned": 20000,
+            "files_hashed": 10000,
+            "bytes_hashed": 40960000,
+            "cache_hits": 0,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 231925000,
+              "seconds": 0.545360249998339
+            },
+            "repeat": 3,
+            "order": 0
+          },
+          {
+            "seconds": 1.0397377090048394,
+            "user_cpu_seconds": 0.701444,
+            "system_cpu_seconds": 0.337876,
+            "input_blocks": 0,
+            "peak_rss_bytes": 54050816,
+            "files_scanned": 20000,
+            "files_hashed": 10000,
+            "bytes_hashed": 40960000,
+            "cache_hits": 0,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 231925000,
+              "seconds": 0.5872389579963055
+            },
+            "repeat": 4,
+            "order": 2
+          }
+        ],
+        "os-warm/hash-empty": [
+          {
+            "seconds": 1.153807875001803,
+            "user_cpu_seconds": 0.761393,
+            "system_cpu_seconds": 0.39072100000000004,
+            "input_blocks": 0,
+            "peak_rss_bytes": 58982400,
+            "files_scanned": 20000,
+            "files_hashed": 10000,
+            "bytes_hashed": 40960000,
+            "cache_hits": 0,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 231925000,
+              "seconds": 0.5070312089956133
+            },
+            "repeat": 0,
+            "order": 1
+          },
+          {
+            "seconds": 1.0959241250020568,
+            "user_cpu_seconds": 0.7539089999999999,
+            "system_cpu_seconds": 0.340689,
+            "input_blocks": 0,
+            "peak_rss_bytes": 58982400,
+            "files_scanned": 20000,
+            "files_hashed": 10000,
+            "bytes_hashed": 40960000,
+            "cache_hits": 0,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 231925000,
+              "seconds": 0.48502845800248906
+            },
+            "repeat": 1,
+            "order": 0
+          },
+          {
+            "seconds": 1.1418800000028568,
+            "user_cpu_seconds": 0.7625289999999999,
+            "system_cpu_seconds": 0.3775609999999999,
+            "input_blocks": 0,
+            "peak_rss_bytes": 59047936,
+            "files_scanned": 20000,
+            "files_hashed": 10000,
+            "bytes_hashed": 40960000,
+            "cache_hits": 0,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 231925000,
+              "seconds": 0.571289457999228
+            },
+            "repeat": 2,
+            "order": 2
+          },
+          {
+            "seconds": 1.1244169579949812,
+            "user_cpu_seconds": 0.7606379999999999,
+            "system_cpu_seconds": 0.36195999999999995,
+            "input_blocks": 0,
+            "peak_rss_bytes": 59113472,
+            "files_scanned": 20000,
+            "files_hashed": 10000,
+            "bytes_hashed": 40960000,
+            "cache_hits": 0,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 231925000,
+              "seconds": 0.4782761250025942
+            },
+            "repeat": 3,
+            "order": 1
+          },
+          {
+            "seconds": 1.1072913329990115,
+            "user_cpu_seconds": 0.7618809999999999,
+            "system_cpu_seconds": 0.34392300000000003,
+            "input_blocks": 0,
+            "peak_rss_bytes": 59047936,
+            "files_scanned": 20000,
+            "files_hashed": 10000,
+            "bytes_hashed": 40960000,
+            "cache_hits": 0,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 231925000,
+              "seconds": 0.49335237500054063
+            },
+            "repeat": 4,
+            "order": 0
+          }
+        ],
+        "os-warm/hash-populated": [
+          {
+            "seconds": 0.8792099159982172,
+            "user_cpu_seconds": 0.6906559999999999,
+            "system_cpu_seconds": 0.18686999999999998,
+            "input_blocks": 0,
+            "peak_rss_bytes": 59113472,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 10000,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 235873544,
+              "seconds": 0.47446366700023646
+            },
+            "repeat": 0,
+            "order": 2
+          },
+          {
+            "seconds": 0.8776524999993853,
+            "user_cpu_seconds": 0.693404,
+            "system_cpu_seconds": 0.18356099999999997,
+            "input_blocks": 0,
+            "peak_rss_bytes": 59129856,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 10000,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 235873544,
+              "seconds": 0.4737993329981691
+            },
+            "repeat": 1,
+            "order": 1
+          },
+          {
+            "seconds": 0.8823998340012622,
+            "user_cpu_seconds": 0.6915789999999999,
+            "system_cpu_seconds": 0.19014899999999996,
+            "input_blocks": 0,
+            "peak_rss_bytes": 59129856,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 10000,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 235873544,
+              "seconds": 0.635682291998819
+            },
+            "repeat": 2,
+            "order": 0
+          },
+          {
+            "seconds": 0.8840169579998474,
+            "user_cpu_seconds": 0.697425,
+            "system_cpu_seconds": 0.18587000000000004,
+            "input_blocks": 0,
+            "peak_rss_bytes": 59031552,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 10000,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 235873544,
+              "seconds": 0.4766118749976158
+            },
+            "repeat": 3,
+            "order": 2
+          },
+          {
+            "seconds": 0.940362000001187,
+            "user_cpu_seconds": 0.727305,
+            "system_cpu_seconds": 0.20440199999999997,
+            "input_blocks": 0,
+            "peak_rss_bytes": 59097088,
+            "files_scanned": 20000,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 10000,
+            "duplicate_bytes": 20480000,
+            "errors": 0,
+            "duplicate_groups": 5000,
+            "result_digest": "c11aa39df8a22d08ac7395d8e7a999496c6c31226e10f716aa720f35e8aa2950",
+            "os_cache_preparation": {
+              "method": "sequential buffered pre-read of fixture and existing SQLite database",
+              "bytes_read": 235873544,
+              "seconds": 0.47683704199880594
+            },
+            "repeat": 4,
+            "order": 1
+          }
+        ]
+      },
+      "summary": {
+        "os-warm/hash-none": {
+          "median_seconds": 1.0397377090048394,
+          "min_seconds": 1.0185009589986294,
+          "max_seconds": 1.0732809999972233,
+          "median_peak_rss_bytes": 54001664,
+          "median_bytes_hashed": 40960000,
+          "median_cache_hits": 0
+        },
+        "os-warm/hash-empty": {
+          "median_seconds": 1.1244169579949812,
+          "min_seconds": 1.0959241250020568,
+          "max_seconds": 1.153807875001803,
+          "median_peak_rss_bytes": 59047936,
+          "median_bytes_hashed": 40960000,
+          "median_cache_hits": 0
+        },
+        "os-warm/hash-populated": {
+          "median_seconds": 0.8823998340012622,
+          "min_seconds": 0.8776524999993853,
+          "max_seconds": 0.940362000001187,
+          "median_peak_rss_bytes": 59113472,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 10000
+        }
+      }
+    }
+  ]
+}

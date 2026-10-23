@@ -1,0 +1,559 @@
+{
+  "command": "python benchmarks/cleanup.py --profile",
+  "original_measurement_command": "python benchmarks/cleanup_impl_measure.py --profile",
+  "baseline_sha": "38b654050f26de074ee51fe809b601e3aae57d82",
+  "source_hashes": {
+    "algorithm": "sha256",
+    "baseline_operations": "b3be69e2eef9951948c930a2c1bb7adc03389befdb84fa8fd779abc6e7b93220",
+    "after_operations": "9739e4ec46cbfe6c56cbba0e2199d7e0ac290e7c682bb311e2cbb15fbb41032c",
+    "after_fs": "90450fcfc66f5f9c10090c510dfa378f166f8e3df67ac06c6d661592f2ad2393",
+    "captured": "Timed source hashes captured after measurements before removing an unused in-memory linked-state assignment. final_operations records that sole subsequent implementation change.",
+    "final_operations": "bbeb61068e1952314f8a47e8a7e4c9e3f0c3a690ef59cc4e303434998c6da6d4"
+  },
+  "profiles": {
+    "before": [
+      {
+        "file": "<baseline-operations>",
+        "line": 162,
+        "function": "quarantine",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 0.0039567280000000005,
+        "cumulative_seconds": 36.661054958
+      },
+      {
+        "file": "<baseline-operations>",
+        "line": 123,
+        "function": "_execute",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 0.012453859000000001,
+        "cumulative_seconds": 36.366298792
+      },
+      {
+        "file": "<baseline-operations>",
+        "line": 42,
+        "function": "_save",
+        "primitive_calls": 2003,
+        "calls": 2003,
+        "self_seconds": 0.013626033000000001,
+        "cumulative_seconds": 34.142081276
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/json/__init__.py",
+        "line": 120,
+        "function": "dump",
+        "primitive_calls": 2003,
+        "calls": 2003,
+        "self_seconds": 6.527302012000001,
+        "cumulative_seconds": 33.415227469
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/json/encoder.py",
+        "line": 414,
+        "function": "_iterencode",
+        "primitive_calls": 48114063,
+        "calls": 48114063,
+        "self_seconds": 4.104331931,
+        "cumulative_seconds": 22.895477661
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/json/encoder.py",
+        "line": 334,
+        "function": "_iterencode_dict",
+        "primitive_calls": 48114063,
+        "calls": 96186063,
+        "self_seconds": 10.171454574,
+        "cumulative_seconds": 18.790424595
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/json/encoder.py",
+        "line": 278,
+        "function": "_iterencode_list",
+        "primitive_calls": 48078009,
+        "calls": 48078009,
+        "self_seconds": 5.063320911,
+        "cumulative_seconds": 14.398504651000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'write' of '_io.TextIOWrapper' objects>",
+        "primitive_calls": 48112060,
+        "calls": 48112060,
+        "self_seconds": 3.9862241610000004,
+        "cumulative_seconds": 3.9862241610000004
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method _json.encode_basestring_ascii>",
+        "primitive_calls": 20042018,
+        "calls": 20042018,
+        "self_seconds": 1.7022121270000001,
+        "cumulative_seconds": 1.7022121270000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.isinstance>",
+        "primitive_calls": 30883277,
+        "calls": 30883277,
+        "self_seconds": 1.628266682,
+        "cumulative_seconds": 1.628266682
+      },
+      {
+        "file": "<baseline-operations>",
+        "line": 106,
+        "function": "_check",
+        "primitive_calls": 2000,
+        "calls": 2000,
+        "self_seconds": 0.005788472,
+        "cumulative_seconds": 1.268434786
+      },
+      {
+        "file": "/Users/darshm/Documents/Projects/filekeeper/filekeeper/fs.py",
+        "line": 37,
+        "function": "safe_path",
+        "primitive_calls": 11002,
+        "calls": 11002,
+        "self_seconds": 0.031458831,
+        "cumulative_seconds": 1.263439414
+      },
+      {
+        "file": "<baseline-operations>",
+        "line": 101,
+        "function": "_paths",
+        "primitive_calls": 2000,
+        "calls": 2000,
+        "self_seconds": 0.002477328,
+        "cumulative_seconds": 0.651585217
+      },
+      {
+        "file": "/Users/darshm/Documents/Projects/filekeeper/filekeeper/fs.py",
+        "line": 21,
+        "function": "digest",
+        "primitive_calls": 6000,
+        "calls": 6000,
+        "self_seconds": 0.020485794,
+        "cumulative_seconds": 0.5037514080000001
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 1228,
+        "function": "resolve",
+        "primitive_calls": 11003,
+        "calls": 11003,
+        "self_seconds": 0.009689592,
+        "cumulative_seconds": 0.476420926
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 437,
+        "function": "__str__",
+        "primitive_calls": 172037,
+        "calls": 172037,
+        "self_seconds": 0.06187492000000001,
+        "cumulative_seconds": 0.442145569
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 551,
+        "function": "drive",
+        "primitive_calls": 122026,
+        "calls": 122026,
+        "self_seconds": 0.043067837000000005,
+        "cumulative_seconds": 0.427359229
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 690,
+        "function": "is_relative_to",
+        "primitive_calls": 16002,
+        "calls": 16002,
+        "self_seconds": 0.016400092,
+        "cumulative_seconds": 0.426458308
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 835,
+        "function": "stat",
+        "primitive_calls": 58006,
+        "calls": 58006,
+        "self_seconds": 0.008818837000000001,
+        "cumulative_seconds": 0.418803621
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method posix.stat>",
+        "primitive_calls": 60006,
+        "calls": 60006,
+        "self_seconds": 0.11788570500000001,
+        "cumulative_seconds": 0.41761843600000004
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 407,
+        "function": "_load_parts",
+        "primitive_calls": 81020,
+        "calls": 81020,
+        "self_seconds": 0.043641370000000006,
+        "cumulative_seconds": 0.384291392
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 447,
+        "function": "__fspath__",
+        "primitive_calls": 93029,
+        "calls": 93029,
+        "self_seconds": 0.022178127000000002,
+        "cumulative_seconds": 0.362798426
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 663,
+        "function": "relative_to",
+        "primitive_calls": 5000,
+        "calls": 5000,
+        "self_seconds": 0.019908453,
+        "cumulative_seconds": 0.358412754
+      },
+      {
+        "file": "<frozen posixpath>",
+        "line": 423,
+        "function": "realpath",
+        "primitive_calls": 11003,
+        "calls": 11003,
+        "self_seconds": 0.00779711,
+        "cumulative_seconds": 0.358189754
+      },
+      {
+        "file": "<frozen posixpath>",
+        "line": 432,
+        "function": "_joinrealpath",
+        "primitive_calls": 11003,
+        "calls": 11003,
+        "self_seconds": 0.06849556400000001,
+        "cumulative_seconds": 0.329797288
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 842,
+        "function": "lstat",
+        "primitive_calls": 42003,
+        "calls": 42003,
+        "self_seconds": 0.007638121,
+        "cumulative_seconds": 0.32950742800000005
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 909,
+        "function": "is_symlink",
+        "primitive_calls": 30003,
+        "calls": 30003,
+        "self_seconds": 0.01245775,
+        "cumulative_seconds": 0.31930746400000004
+      },
+      {
+        "file": "<frozen _collections_abc>",
+        "line": 1022,
+        "function": "__iter__",
+        "primitive_calls": 104005,
+        "calls": 104005,
+        "self_seconds": 0.020492113000000003,
+        "cumulative_seconds": 0.306406564
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 380,
+        "function": "with_segments",
+        "primitive_calls": 159021,
+        "calls": 159021,
+        "self_seconds": 0.06380469500000001,
+        "cumulative_seconds": 0.28718759600000004
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 277,
+        "function": "__getitem__",
+        "primitive_calls": 88003,
+        "calls": 88003,
+        "self_seconds": 0.043281445,
+        "cumulative_seconds": 0.285914451
+      }
+    ],
+    "after": [
+      {
+        "file": "/Users/darshm/Documents/Projects/filekeeper/filekeeper/operations.py",
+        "line": 168,
+        "function": "quarantine",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 0.004056347,
+        "cumulative_seconds": 2.226265375
+      },
+      {
+        "file": "/Users/darshm/Documents/Projects/filekeeper/filekeeper/operations.py",
+        "line": 131,
+        "function": "_execute",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 0.006066183,
+        "cumulative_seconds": 1.921541959
+      },
+      {
+        "file": "/Users/darshm/Documents/Projects/filekeeper/filekeeper/fs.py",
+        "line": 37,
+        "function": "safe_path",
+        "primitive_calls": 11002,
+        "calls": 11002,
+        "self_seconds": 0.02732876,
+        "cumulative_seconds": 1.1953129310000001
+      },
+      {
+        "file": "/Users/darshm/Documents/Projects/filekeeper/filekeeper/operations.py",
+        "line": 112,
+        "function": "_check",
+        "primitive_calls": 2000,
+        "calls": 2000,
+        "self_seconds": 0.004549451,
+        "cumulative_seconds": 1.010719804
+      },
+      {
+        "file": "/Users/darshm/Documents/Projects/filekeeper/filekeeper/operations.py",
+        "line": 107,
+        "function": "_paths",
+        "primitive_calls": 2000,
+        "calls": 2000,
+        "self_seconds": 0.002081833,
+        "cumulative_seconds": 0.6086901130000001
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 1228,
+        "function": "resolve",
+        "primitive_calls": 11003,
+        "calls": 11003,
+        "self_seconds": 0.008198993,
+        "cumulative_seconds": 0.45832234200000005
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 690,
+        "function": "is_relative_to",
+        "primitive_calls": 16002,
+        "calls": 16002,
+        "self_seconds": 0.013512612,
+        "cumulative_seconds": 0.403418082
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 835,
+        "function": "stat",
+        "primitive_calls": 58006,
+        "calls": 58006,
+        "self_seconds": 0.008472008000000001,
+        "cumulative_seconds": 0.398118501
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method posix.stat>",
+        "primitive_calls": 60006,
+        "calls": 60006,
+        "self_seconds": 0.109039387,
+        "cumulative_seconds": 0.397262145
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 437,
+        "function": "__str__",
+        "primitive_calls": 162038,
+        "calls": 162038,
+        "self_seconds": 0.052964567000000004,
+        "cumulative_seconds": 0.373499901
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 551,
+        "function": "drive",
+        "primitive_calls": 118027,
+        "calls": 118027,
+        "self_seconds": 0.038105818,
+        "cumulative_seconds": 0.36493906600000003
+      },
+      {
+        "file": "<frozen posixpath>",
+        "line": 423,
+        "function": "realpath",
+        "primitive_calls": 11003,
+        "calls": 11003,
+        "self_seconds": 0.006552493,
+        "cumulative_seconds": 0.345548526
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 663,
+        "function": "relative_to",
+        "primitive_calls": 5000,
+        "calls": 5000,
+        "self_seconds": 0.015194652000000001,
+        "cumulative_seconds": 0.32906664300000005
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 407,
+        "function": "_load_parts",
+        "primitive_calls": 77020,
+        "calls": 77020,
+        "self_seconds": 0.037295404000000004,
+        "cumulative_seconds": 0.326833248
+      },
+      {
+        "file": "<frozen posixpath>",
+        "line": 432,
+        "function": "_joinrealpath",
+        "primitive_calls": 11003,
+        "calls": 11003,
+        "self_seconds": 0.063792983,
+        "cumulative_seconds": 0.320187745
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 842,
+        "function": "lstat",
+        "primitive_calls": 42003,
+        "calls": 42003,
+        "self_seconds": 0.00733635,
+        "cumulative_seconds": 0.3111124
+      },
+      {
+        "file": "/Users/darshm/Documents/Projects/filekeeper/filekeeper/fs.py",
+        "line": 21,
+        "function": "digest",
+        "primitive_calls": 6000,
+        "calls": 6000,
+        "self_seconds": 0.017725539000000002,
+        "cumulative_seconds": 0.30018341800000004
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 909,
+        "function": "is_symlink",
+        "primitive_calls": 30003,
+        "calls": 30003,
+        "self_seconds": 0.010992072,
+        "cumulative_seconds": 0.298724194
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 447,
+        "function": "__fspath__",
+        "primitive_calls": 83030,
+        "calls": 83030,
+        "self_seconds": 0.018259876,
+        "cumulative_seconds": 0.29439927800000004
+      },
+      {
+        "file": "<frozen _collections_abc>",
+        "line": 1022,
+        "function": "__iter__",
+        "primitive_calls": 104005,
+        "calls": 104005,
+        "self_seconds": 0.018170464,
+        "cumulative_seconds": 0.28903695
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 277,
+        "function": "__getitem__",
+        "primitive_calls": 88003,
+        "calls": 88003,
+        "self_seconds": 0.039719697000000005,
+        "cumulative_seconds": 0.270866486
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 380,
+        "function": "with_segments",
+        "primitive_calls": 155022,
+        "calls": 155022,
+        "self_seconds": 0.057742058000000006,
+        "cumulative_seconds": 0.25841119300000004
+      },
+      {
+        "file": "<frozen _collections_abc>",
+        "line": 1032,
+        "function": "__contains__",
+        "primitive_calls": 16002,
+        "calls": 16002,
+        "self_seconds": 0.017444598000000002,
+        "cumulative_seconds": 0.23627608700000002
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method posix.link>",
+        "primitive_calls": 1000,
+        "calls": 1000,
+        "self_seconds": 0.230657459,
+        "cumulative_seconds": 0.23114859100000001
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 387,
+        "function": "_parse_path",
+        "primitive_calls": 77021,
+        "calls": 77021,
+        "self_seconds": 0.11888380100000001,
+        "cumulative_seconds": 0.219683876
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 420,
+        "function": "_from_parsed_parts",
+        "primitive_calls": 86004,
+        "calls": 86004,
+        "self_seconds": 0.025866737,
+        "cumulative_seconds": 0.18422854300000002
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 1157,
+        "function": "__init__",
+        "primitive_calls": 168025,
+        "calls": 168025,
+        "self_seconds": 0.046554628,
+        "cumulative_seconds": 0.177483366
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 519,
+        "function": "__eq__",
+        "primitive_calls": 64005,
+        "calls": 64005,
+        "self_seconds": 0.019620718000000002,
+        "cumulative_seconds": 0.169020591
+      },
+      {
+        "file": "<frozen posixpath>",
+        "line": 71,
+        "function": "join",
+        "primitive_calls": 144036,
+        "calls": 144036,
+        "self_seconds": 0.093971734,
+        "cumulative_seconds": 0.16785102300000002
+      },
+      {
+        "file": "/Users/darshm/.pyenv/versions/3.12.12/lib/python3.12/pathlib.py",
+        "line": 484,
+        "function": "_str_normcase",
+        "primitive_calls": 128010,
+        "calls": 128010,
+        "self_seconds": 0.048471846000000006,
+        "cumulative_seconds": 0.14582697
+      }
+    ]
+  }
+}

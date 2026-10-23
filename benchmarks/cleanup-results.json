@@ -1,0 +1,119 @@
+{
+  "baseline_sha": "38b654050f26de074ee51fe809b601e3aae57d82",
+  "baseline_command": [
+    "git",
+    "show",
+    "38b654050f26de074ee51fe809b601e3aae57d82:filekeeper/operations.py"
+  ],
+  "command": "python benchmarks/cleanup.py",
+  "environment": {
+    "python": "3.12.12 (main, Feb 20 2026, 17:10:15) [Clang 17.0.0 (clang-1700.3.19.1)]",
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "cores": 10,
+    "load_end": [
+      3.7412109375,
+      3.3974609375,
+      3.392578125
+    ],
+    "load_start": null,
+    "load_note": "Start load was not captured. End load captured during original timing run. No measurements rerun for artifact rename."
+  },
+  "workload": {
+    "groups": 250,
+    "copies": 5,
+    "duplicates": 1000,
+    "payload": "document NNNN newline repeated 4096 times",
+    "timing": "quarantine(scan_report), scan and fixture creation excluded"
+  },
+  "runs": [
+    {
+      "side": "before",
+      "iteration": 0,
+      "seconds": 7.209815999995044,
+      "moved": 1000,
+      "errors": 0,
+      "duplicate_bytes": 57344000
+    },
+    {
+      "side": "after",
+      "iteration": 0,
+      "seconds": 1.173429499998747,
+      "moved": 1000,
+      "errors": 0,
+      "duplicate_bytes": 57344000
+    },
+    {
+      "side": "before",
+      "iteration": 1,
+      "seconds": 7.24986345799698,
+      "moved": 1000,
+      "errors": 0,
+      "duplicate_bytes": 57344000
+    },
+    {
+      "side": "after",
+      "iteration": 1,
+      "seconds": 1.1624805419996846,
+      "moved": 1000,
+      "errors": 0,
+      "duplicate_bytes": 57344000
+    },
+    {
+      "side": "before",
+      "iteration": 2,
+      "seconds": 7.186397000004945,
+      "moved": 1000,
+      "errors": 0,
+      "duplicate_bytes": 57344000
+    },
+    {
+      "side": "after",
+      "iteration": 2,
+      "seconds": 1.2073477079975419,
+      "moved": 1000,
+      "errors": 0,
+      "duplicate_bytes": 57344000
+    },
+    {
+      "side": "before",
+      "iteration": 3,
+      "seconds": 7.215826374995231,
+      "moved": 1000,
+      "errors": 0,
+      "duplicate_bytes": 57344000
+    },
+    {
+      "side": "after",
+      "iteration": 3,
+      "seconds": 1.1692082080044202,
+      "moved": 1000,
+      "errors": 0,
+      "duplicate_bytes": 57344000
+    },
+    {
+      "side": "before",
+      "iteration": 4,
+      "seconds": 7.246121290998417,
+      "moved": 1000,
+      "errors": 0,
+      "duplicate_bytes": 57344000
+    },
+    {
+      "side": "after",
+      "iteration": 4,
+      "seconds": 1.2139310839993414,
+      "moved": 1000,
+      "errors": 0,
+      "duplicate_bytes": 57344000
+    }
+  ],
+  "original_measurement_command": "python benchmarks/cleanup_impl_measure.py",
+  "source_hashes": {
+    "algorithm": "sha256",
+    "baseline_operations": "b3be69e2eef9951948c930a2c1bb7adc03389befdb84fa8fd779abc6e7b93220",
+    "after_operations": "9739e4ec46cbfe6c56cbba0e2199d7e0ac290e7c682bb311e2cbb15fbb41032c",
+    "after_fs": "90450fcfc66f5f9c10090c510dfa378f166f8e3df67ac06c6d661592f2ad2393",
+    "captured": "Timed source hashes captured after measurements before removing an unused in-memory linked-state assignment. final_operations records that sole subsequent implementation change.",
+    "final_operations": "bbeb61068e1952314f8a47e8a7e4c9e3f0c3a690ef59cc4e303434998c6da6d4"
+  }
+}

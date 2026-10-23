@@ -1,0 +1,2266 @@
+{
+  "schema_version": 2,
+  "environment": {
+    "python": "3.12.12",
+    "executable": "/Users/darshm/.pyenv/versions/3.12.12/bin/python3",
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "cpu_count": 10,
+    "load_average": [
+      1.6337890625,
+      1.65380859375,
+      1.6669921875
+    ],
+    "utc": "2026-10-23T19:19:12.355151+00:00",
+    "git_head": "38b654050f26de074ee51fe809b601e3aae57d82",
+    "git_status": "D LEARNING.md\n M README.md\n D RESUME.md\n M benchmarks/README.md\n M benchmarks/run.py\n M filekeeper/__main__.py\n M filekeeper/fs.py\n M filekeeper/operations.py\n M tests/test_benchmarks.py\n M tests/test_recovery.py\n?? .DS_Store\n?? .audit/\n?? ARCHITECTURE.md\n?? DESIGN.md\n?? benchmarks/cleanup-profile.json\n?? benchmarks/cleanup-results.json\n?? benchmarks/cleanup.py\n?? benchmarks/profile_scan.py\n?? benchmarks/results/balanced-warm-2026-10-23.json\n?? benchmarks/results/balanced-warm-2026-10-23.log\n?? benchmarks/results/environment-2026-10-23.json\n?? benchmarks/results/large-files-warm-2026-10-23.json\n?? benchmarks/results/large-files-warm-2026-10-23.log\n?? benchmarks/results/os-cold-permission-2026-10-23.json\n?? benchmarks/results/profile-scan-2026-10-23.txt\n?? benchmarks/results/small-files-warm-2026-10-23.json\n?? benchmarks/results/small-files-warm-2026-10-23.log\n?? tests/test_verify_bytes.py",
+    "source_sha256": {
+      "benchmarks/run.py": "ba8d081f974ff3df2ac6d9a1a0aae441f1fd65953cfcbd303f0bfe18121df68c",
+      "filekeeper/core.py": "7d1bda4d28123833a00a5ab1db40bac419c0b55eb0d5a1f8c04e58a16a3a03fa",
+      "filekeeper/cache.py": "f8d69353aca8e8489cd56c9c9dc52ca915bcec5ecbc756104ab48ccdcf05b4d2",
+      "filekeeper/fs.py": "90450fcfc66f5f9c10090c510dfa378f166f8e3df67ac06c6d661592f2ad2393"
+    },
+    "memory_bytes": 17179869184,
+    "temporary_volume_free_bytes": 29371084800,
+    "load_average_end": [
+      2.58740234375,
+      2.24169921875,
+      1.91064453125
+    ],
+    "utc_end": "2026-10-23T19:21:37.346550+00:00"
+  },
+  "parameters": {
+    "scale": "balanced",
+    "files_per_profile": 2048,
+    "base_size_bytes": 1048576,
+    "repeats": 5,
+    "seed": 42,
+    "os_caches": [
+      "cold"
+    ]
+  },
+  "repro_command": [
+    "/Users/darshm/.pyenv/versions/3.12.12/bin/python3",
+    "-m",
+    "benchmarks.run",
+    "--scale",
+    "balanced",
+    "--repeats",
+    "5",
+    "--os-cache",
+    "cold",
+    "--output",
+    "benchmarks/results/balanced-cold.json"
+  ],
+  "method": "Fresh process per scan; scan timer excludes imports, fixture generation, SQLite priming, and OS cache preparation. Warm is a buffered pre-read, not guaranteed residency. Cold is successful macOS system-wide purge or Linux sync plus drop_caches=3 before each timed scan. Hash caches are independently none, empty, populated. Mode order rotates each repetition. RSS includes interpreter and OS preparation. Expected content groups come from fixture generation, not a reference scan.",
+  "profiles": [
+    {
+      "name": "unique-sizes",
+      "total_bytes": 2149581824,
+      "expected": {
+        "files_scanned": 2048,
+        "files_hashed": 0,
+        "bytes_hashed": 0,
+        "duplicate_groups": 0,
+        "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "duplicate_bytes": 0
+      },
+      "samples": {
+        "os-cold/hash-none": [
+          {
+            "seconds": 0.03449774999899091,
+            "user_cpu_seconds": 0.012478999999999997,
+            "system_cpu_seconds": 0.005511000000000002,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22446080,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.6262485000042943
+            },
+            "repeat": 0,
+            "order": 0
+          },
+          {
+            "seconds": 0.026788249997480307,
+            "user_cpu_seconds": 0.012756,
+            "system_cpu_seconds": 0.005276999999999997,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22544384,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.3901212499986286
+            },
+            "repeat": 1,
+            "order": 2
+          },
+          {
+            "seconds": 0.032498083004611544,
+            "user_cpu_seconds": 0.012875999999999995,
+            "system_cpu_seconds": 0.0053409999999999985,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22609920,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.4392094580034609
+            },
+            "repeat": 2,
+            "order": 1
+          },
+          {
+            "seconds": 0.03163400000630645,
+            "user_cpu_seconds": 0.013357999999999998,
+            "system_cpu_seconds": 0.005512000000000003,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22495232,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.315369791998819
+            },
+            "repeat": 3,
+            "order": 0
+          },
+          {
+            "seconds": 0.03485299999738345,
+            "user_cpu_seconds": 0.013418,
+            "system_cpu_seconds": 0.005552000000000001,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22544384,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.48977587500121444
+            },
+            "repeat": 4,
+            "order": 2
+          }
+        ],
+        "os-cold/hash-empty": [
+          {
+            "seconds": 0.04619083400029922,
+            "user_cpu_seconds": 0.013679999999999998,
+            "system_cpu_seconds": 0.007302999999999997,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22724608,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.6678519589986536
+            },
+            "repeat": 0,
+            "order": 1
+          },
+          {
+            "seconds": 0.07010266600264004,
+            "user_cpu_seconds": 0.013334000000000002,
+            "system_cpu_seconds": 0.010665000000000008,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22462464,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.28584029099874897
+            },
+            "repeat": 1,
+            "order": 0
+          },
+          {
+            "seconds": 0.06216233399754856,
+            "user_cpu_seconds": 0.013558,
+            "system_cpu_seconds": 0.010185999999999987,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22626304,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.3749718330000178
+            },
+            "repeat": 2,
+            "order": 2
+          },
+          {
+            "seconds": 0.05112254100095015,
+            "user_cpu_seconds": 0.013847000000000002,
+            "system_cpu_seconds": 0.008886999999999992,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22528000,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.34432099999685306
+            },
+            "repeat": 3,
+            "order": 1
+          },
+          {
+            "seconds": 0.09102533400437096,
+            "user_cpu_seconds": 0.014282,
+            "system_cpu_seconds": 0.009834999999999997,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22593536,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.3836218340002233
+            },
+            "repeat": 4,
+            "order": 0
+          }
+        ],
+        "os-cold/hash-populated": [
+          {
+            "seconds": 0.05262970799958566,
+            "user_cpu_seconds": 0.013307,
+            "system_cpu_seconds": 0.009053999999999998,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22528000,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.2633304170012707
+            },
+            "repeat": 0,
+            "order": 2
+          },
+          {
+            "seconds": 0.04663687500578817,
+            "user_cpu_seconds": 0.013282000000000002,
+            "system_cpu_seconds": 0.007836,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22528000,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.3164286669998546
+            },
+            "repeat": 1,
+            "order": 1
+          },
+          {
+            "seconds": 0.04413887499686098,
+            "user_cpu_seconds": 0.013425999999999997,
+            "system_cpu_seconds": 0.007164,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22626304,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.27702145899820607
+            },
+            "repeat": 2,
+            "order": 0
+          },
+          {
+            "seconds": 0.049651209003059193,
+            "user_cpu_seconds": 0.013938999999999997,
+            "system_cpu_seconds": 0.007375999999999999,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22511616,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.2931879590032622
+            },
+            "repeat": 3,
+            "order": 2
+          },
+          {
+            "seconds": 0.06164916700072354,
+            "user_cpu_seconds": 0.013140000000000002,
+            "system_cpu_seconds": 0.009293,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22528000,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 0,
+            "duplicate_bytes": 0,
+            "errors": 0,
+            "duplicate_groups": 0,
+            "result_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.2467734579986427
+            },
+            "repeat": 4,
+            "order": 1
+          }
+        ]
+      },
+      "summary": {
+        "os-cold/hash-none": {
+          "median_seconds": 0.032498083004611544,
+          "min_seconds": 0.026788249997480307,
+          "max_seconds": 0.03485299999738345,
+          "median_peak_rss_bytes": 22544384,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 0
+        },
+        "os-cold/hash-empty": {
+          "median_seconds": 0.06216233399754856,
+          "min_seconds": 0.04619083400029922,
+          "max_seconds": 0.09102533400437096,
+          "median_peak_rss_bytes": 22593536,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 0
+        },
+        "os-cold/hash-populated": {
+          "median_seconds": 0.049651209003059193,
+          "min_seconds": 0.04413887499686098,
+          "max_seconds": 0.06164916700072354,
+          "median_peak_rss_bytes": 22528000,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 0
+        }
+      }
+    },
+    {
+      "name": "duplicate-heavy",
+      "total_bytes": 2147483648,
+      "expected": {
+        "files_scanned": 2048,
+        "files_hashed": 2048,
+        "bytes_hashed": 2147483648,
+        "duplicate_groups": 1024,
+        "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+        "duplicate_bytes": 1073741824
+      },
+      "samples": {
+        "os-cold/hash-none": [
+          {
+            "seconds": 4.495012957995641,
+            "user_cpu_seconds": 0.831661,
+            "system_cpu_seconds": 0.315069,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22544384,
+            "files_scanned": 2048,
+            "files_hashed": 2048,
+            "bytes_hashed": 2147483648,
+            "cache_hits": 0,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.4033410830015782
+            },
+            "repeat": 0,
+            "order": 0
+          },
+          {
+            "seconds": 3.388323084000149,
+            "user_cpu_seconds": 0.8829809999999999,
+            "system_cpu_seconds": 0.292003,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22478848,
+            "files_scanned": 2048,
+            "files_hashed": 2048,
+            "bytes_hashed": 2147483648,
+            "cache_hits": 0,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.41116833400155883
+            },
+            "repeat": 1,
+            "order": 2
+          },
+          {
+            "seconds": 2.884523958004138,
+            "user_cpu_seconds": 0.7977479999999999,
+            "system_cpu_seconds": 0.24521499999999996,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22511616,
+            "files_scanned": 2048,
+            "files_hashed": 2048,
+            "bytes_hashed": 2147483648,
+            "cache_hits": 0,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.7289298329997109
+            },
+            "repeat": 2,
+            "order": 1
+          },
+          {
+            "seconds": 3.591135208000196,
+            "user_cpu_seconds": 0.8553029999999999,
+            "system_cpu_seconds": 0.26718,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22544384,
+            "files_scanned": 2048,
+            "files_hashed": 2048,
+            "bytes_hashed": 2147483648,
+            "cache_hits": 0,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.3673431250063004
+            },
+            "repeat": 3,
+            "order": 0
+          },
+          {
+            "seconds": 3.0157728330013924,
+            "user_cpu_seconds": 0.8222379999999999,
+            "system_cpu_seconds": 0.258098,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22724608,
+            "files_scanned": 2048,
+            "files_hashed": 2048,
+            "bytes_hashed": 2147483648,
+            "cache_hits": 0,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.3244543750042794
+            },
+            "repeat": 4,
+            "order": 2
+          }
+        ],
+        "os-cold/hash-empty": [
+          {
+            "seconds": 3.2121794580016285,
+            "user_cpu_seconds": 0.8349989999999999,
+            "system_cpu_seconds": 0.27280899999999997,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22560768,
+            "files_scanned": 2048,
+            "files_hashed": 2048,
+            "bytes_hashed": 2147483648,
+            "cache_hits": 0,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.26067095799953677
+            },
+            "repeat": 0,
+            "order": 1
+          },
+          {
+            "seconds": 3.005591875000391,
+            "user_cpu_seconds": 0.82326,
+            "system_cpu_seconds": 0.27956899999999996,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22560768,
+            "files_scanned": 2048,
+            "files_hashed": 2048,
+            "bytes_hashed": 2147483648,
+            "cache_hits": 0,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.3832286250035395
+            },
+            "repeat": 1,
+            "order": 0
+          },
+          {
+            "seconds": 3.1739925840010983,
+            "user_cpu_seconds": 0.83087,
+            "system_cpu_seconds": 0.26018600000000003,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22511616,
+            "files_scanned": 2048,
+            "files_hashed": 2048,
+            "bytes_hashed": 2147483648,
+            "cache_hits": 0,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.31314420900162077
+            },
+            "repeat": 2,
+            "order": 2
+          },
+          {
+            "seconds": 3.378977959000622,
+            "user_cpu_seconds": 0.882023,
+            "system_cpu_seconds": 0.301465,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22577152,
+            "files_scanned": 2048,
+            "files_hashed": 2048,
+            "bytes_hashed": 2147483648,
+            "cache_hits": 0,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.5920375829955447
+            },
+            "repeat": 3,
+            "order": 1
+          },
+          {
+            "seconds": 3.155582667000999,
+            "user_cpu_seconds": 0.835877,
+            "system_cpu_seconds": 0.27472199999999997,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22708224,
+            "files_scanned": 2048,
+            "files_hashed": 2048,
+            "bytes_hashed": 2147483648,
+            "cache_hits": 0,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.612128249995294
+            },
+            "repeat": 4,
+            "order": 0
+          }
+        ],
+        "os-cold/hash-populated": [
+          {
+            "seconds": 0.22658841700467747,
+            "user_cpu_seconds": 0.13705199999999998,
+            "system_cpu_seconds": 0.041908999999999995,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22511616,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 2048,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.6037025830009952
+            },
+            "repeat": 0,
+            "order": 2
+          },
+          {
+            "seconds": 0.22292495900182985,
+            "user_cpu_seconds": 0.13513299999999998,
+            "system_cpu_seconds": 0.042853,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22626304,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 2048,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.4987561250018189
+            },
+            "repeat": 1,
+            "order": 1
+          },
+          {
+            "seconds": 0.2279629170006956,
+            "user_cpu_seconds": 0.142978,
+            "system_cpu_seconds": 0.046324,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22642688,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 2048,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.3220942499974626
+            },
+            "repeat": 2,
+            "order": 0
+          },
+          {
+            "seconds": 0.22188058299798286,
+            "user_cpu_seconds": 0.13430199999999998,
+            "system_cpu_seconds": 0.040981000000000004,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22495232,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 2048,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.33565470799658215
+            },
+            "repeat": 3,
+            "order": 2
+          },
+          {
+            "seconds": 0.2204825000007986,
+            "user_cpu_seconds": 0.134988,
+            "system_cpu_seconds": 0.042345999999999995,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22511616,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 2048,
+            "duplicate_bytes": 1073741824,
+            "errors": 0,
+            "duplicate_groups": 1024,
+            "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.33543416700558737
+            },
+            "repeat": 4,
+            "order": 1
+          }
+        ]
+      },
+      "summary": {
+        "os-cold/hash-none": {
+          "median_seconds": 3.388323084000149,
+          "min_seconds": 2.884523958004138,
+          "max_seconds": 4.495012957995641,
+          "median_peak_rss_bytes": 22544384,
+          "median_bytes_hashed": 2147483648,
+          "median_cache_hits": 0
+        },
+        "os-cold/hash-empty": {
+          "median_seconds": 3.1739925840010983,
+          "min_seconds": 3.005591875000391,
+          "max_seconds": 3.378977959000622,
+          "median_peak_rss_bytes": 22560768,
+          "median_bytes_hashed": 2147483648,
+          "median_cache_hits": 0
+        },
+        "os-cold/hash-populated": {
+          "median_seconds": 0.22292495900182985,
+          "min_seconds": 0.2204825000007986,
+          "max_seconds": 0.2279629170006956,
+          "median_peak_rss_bytes": 22511616,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 2048
+        }
+      }
+    },
+    {
+      "name": "mixed",
+      "total_bytes": 2149057024,
+      "expected": {
+        "files_scanned": 2048,
+        "files_hashed": 1024,
+        "bytes_hashed": 1073741824,
+        "duplicate_groups": 512,
+        "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+        "duplicate_bytes": 536870912
+      },
+      "samples": {
+        "os-cold/hash-none": [
+          {
+            "seconds": 1.9999232499976642,
+            "user_cpu_seconds": 0.416887,
+            "system_cpu_seconds": 0.14841,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22560768,
+            "files_scanned": 2048,
+            "files_hashed": 1024,
+            "bytes_hashed": 1073741824,
+            "cache_hits": 0,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.3976277910041972
+            },
+            "repeat": 0,
+            "order": 0
+          },
+          {
+            "seconds": 1.7360607089940459,
+            "user_cpu_seconds": 0.431965,
+            "system_cpu_seconds": 0.13421,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22544384,
+            "files_scanned": 2048,
+            "files_hashed": 1024,
+            "bytes_hashed": 1073741824,
+            "cache_hits": 0,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.6552913749983418
+            },
+            "repeat": 1,
+            "order": 2
+          },
+          {
+            "seconds": 1.6751063339979737,
+            "user_cpu_seconds": 0.422367,
+            "system_cpu_seconds": 0.13507999999999998,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22478848,
+            "files_scanned": 2048,
+            "files_hashed": 1024,
+            "bytes_hashed": 1073741824,
+            "cache_hits": 0,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.3831785000002128
+            },
+            "repeat": 2,
+            "order": 1
+          },
+          {
+            "seconds": 1.7748572920027073,
+            "user_cpu_seconds": 0.42845599999999995,
+            "system_cpu_seconds": 0.14249699999999998,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22675456,
+            "files_scanned": 2048,
+            "files_hashed": 1024,
+            "bytes_hashed": 1073741824,
+            "cache_hits": 0,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.4231061669997871
+            },
+            "repeat": 3,
+            "order": 0
+          },
+          {
+            "seconds": 1.6415194170040195,
+            "user_cpu_seconds": 0.43921899999999997,
+            "system_cpu_seconds": 0.16582599999999997,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22495232,
+            "files_scanned": 2048,
+            "files_hashed": 1024,
+            "bytes_hashed": 1073741824,
+            "cache_hits": 0,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.39298874999803957
+            },
+            "repeat": 4,
+            "order": 2
+          }
+        ],
+        "os-cold/hash-empty": [
+          {
+            "seconds": 1.6018861249976908,
+            "user_cpu_seconds": 0.42002799999999996,
+            "system_cpu_seconds": 0.135099,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22511616,
+            "files_scanned": 2048,
+            "files_hashed": 1024,
+            "bytes_hashed": 1073741824,
+            "cache_hits": 0,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.38574658400466433
+            },
+            "repeat": 0,
+            "order": 1
+          },
+          {
+            "seconds": 1.7397252090013353,
+            "user_cpu_seconds": 0.44303,
+            "system_cpu_seconds": 0.144417,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22446080,
+            "files_scanned": 2048,
+            "files_hashed": 1024,
+            "bytes_hashed": 1073741824,
+            "cache_hits": 0,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.4237680420046672
+            },
+            "repeat": 1,
+            "order": 0
+          },
+          {
+            "seconds": 2.287761750005302,
+            "user_cpu_seconds": 0.52355,
+            "system_cpu_seconds": 0.182579,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22478848,
+            "files_scanned": 2048,
+            "files_hashed": 1024,
+            "bytes_hashed": 1073741824,
+            "cache_hits": 0,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.669070042000385
+            },
+            "repeat": 2,
+            "order": 2
+          },
+          {
+            "seconds": 1.8806446670059813,
+            "user_cpu_seconds": 0.42732499999999995,
+            "system_cpu_seconds": 0.142509,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22511616,
+            "files_scanned": 2048,
+            "files_hashed": 1024,
+            "bytes_hashed": 1073741824,
+            "cache_hits": 0,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.46022850000008475
+            },
+            "repeat": 3,
+            "order": 1
+          },
+          {
+            "seconds": 1.8409680420008954,
+            "user_cpu_seconds": 0.435552,
+            "system_cpu_seconds": 0.144839,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22609920,
+            "files_scanned": 2048,
+            "files_hashed": 1024,
+            "bytes_hashed": 1073741824,
+            "cache_hits": 0,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.45008754200534895
+            },
+            "repeat": 4,
+            "order": 0
+          }
+        ],
+        "os-cold/hash-populated": [
+          {
+            "seconds": 0.15521104199433466,
+            "user_cpu_seconds": 0.075076,
+            "system_cpu_seconds": 0.027472999999999997,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22642688,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 1024,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.32612041600077646
+            },
+            "repeat": 0,
+            "order": 2
+          },
+          {
+            "seconds": 0.14058612499502487,
+            "user_cpu_seconds": 0.07429799999999999,
+            "system_cpu_seconds": 0.02544,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22577152,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 1024,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.30566766599804396
+            },
+            "repeat": 1,
+            "order": 1
+          },
+          {
+            "seconds": 0.13205966600071406,
+            "user_cpu_seconds": 0.07381399999999999,
+            "system_cpu_seconds": 0.024080999999999998,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22511616,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 1024,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.35743854100292083
+            },
+            "repeat": 2,
+            "order": 0
+          },
+          {
+            "seconds": 0.13188008400175022,
+            "user_cpu_seconds": 0.07564799999999999,
+            "system_cpu_seconds": 0.025946999999999998,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22511616,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 1024,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.3392802909947932
+            },
+            "repeat": 3,
+            "order": 2
+          },
+          {
+            "seconds": 0.12885804200050188,
+            "user_cpu_seconds": 0.075226,
+            "system_cpu_seconds": 0.025382000000000002,
+            "input_blocks": 0,
+            "peak_rss_bytes": 22528000,
+            "files_scanned": 2048,
+            "files_hashed": 0,
+            "bytes_hashed": 0,
+            "cache_hits": 1024,
+            "duplicate_bytes": 536870912,
+            "errors": 0,
+            "duplicate_groups": 512,
+            "result_digest": "598b863c356f3bd05641170df664d8e82fb5553b08a15889e9710906348b9a31",
+            "os_cache_preparation": {
+              "command": [
+                "sudo",
+                "-n",
+                "/usr/sbin/purge"
+              ],
+              "returncode": 0,
+              "attempts": [
+                {
+                  "command": [
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 1,
+                  "stdout": "",
+                  "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+                },
+                {
+                  "command": [
+                    "sudo",
+                    "-n",
+                    "/usr/sbin/purge"
+                  ],
+                  "returncode": 0,
+                  "stdout": "",
+                  "stderr": ""
+                }
+              ],
+              "seconds": 0.3185202499953448
+            },
+            "repeat": 4,
+            "order": 1
+          }
+        ]
+      },
+      "summary": {
+        "os-cold/hash-none": {
+          "median_seconds": 1.7360607089940459,
+          "min_seconds": 1.6415194170040195,
+          "max_seconds": 1.9999232499976642,
+          "median_peak_rss_bytes": 22544384,
+          "median_bytes_hashed": 1073741824,
+          "median_cache_hits": 0
+        },
+        "os-cold/hash-empty": {
+          "median_seconds": 1.8409680420008954,
+          "min_seconds": 1.6018861249976908,
+          "max_seconds": 2.287761750005302,
+          "median_peak_rss_bytes": 22511616,
+          "median_bytes_hashed": 1073741824,
+          "median_cache_hits": 0
+        },
+        "os-cold/hash-populated": {
+          "median_seconds": 0.13205966600071406,
+          "min_seconds": 0.12885804200050188,
+          "max_seconds": 0.15521104199433466,
+          "median_peak_rss_bytes": 22528000,
+          "median_bytes_hashed": 0,
+          "median_cache_hits": 1024
+        }
+      }
+    }
+  ]
+}

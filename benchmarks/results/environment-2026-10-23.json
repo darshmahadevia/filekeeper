@@ -1,0 +1,77 @@
+{
+  "utc": "2026-10-23T18:08:59.989211+00:00",
+  "python": "3.12.12 (main, Feb 20 2026, 17:10:15) [Clang 17.0.0 (clang-1700.3.19.1)]",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "commands": [
+    {
+      "command": [
+        "uptime"
+      ],
+      "returncode": 0,
+      "stdout": "14:08  up 1 day,  2:03, 2 users, load averages: 2.81 3.22 3.32\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "sysctl",
+        "-n",
+        "hw.ncpu"
+      ],
+      "returncode": 0,
+      "stdout": "10\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "sysctl",
+        "-n",
+        "hw.memsize"
+      ],
+      "returncode": 0,
+      "stdout": "17179869184\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "sysctl",
+        "-n",
+        "machdep.cpu.brand_string"
+      ],
+      "returncode": 0,
+      "stdout": "Apple M4\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "df",
+        "-h",
+        "."
+      ],
+      "returncode": 0,
+      "stdout": "Filesystem      Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk3s5   228Gi   175Gi    27Gi    87%    2.0M  285M    1%   /System/Volumes/Data\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "diskutil",
+        "info",
+        "-plist",
+        "."
+      ],
+      "returncode": 1,
+      "stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n<plist version=\"1.0\">\n<dict>\n\t<key>Error</key>\n\t<true/>\n\t<key>ErrorMessage</key>\n\t<string>Could not find disk: .</string>\n\t<key>ExitCode</key>\n\t<integer>1</integer>\n</dict>\n</plist>\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "diskutil",
+        "info",
+        "-plist",
+        "/System/Volumes/Data"
+      ],
+      "returncode": 0,
+      "stdout": "{\"FilesystemName\": \"APFS\", \"FilesystemType\": \"apfs\", \"SolidState\": true, \"BusProtocol\": \"Apple Fabric\"}",
+      "stderr": ""
+    }
+  ]
+}

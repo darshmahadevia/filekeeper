@@ -1,0 +1,27 @@
+{
+  "utc": "2026-10-23T18:07:52.406778+00:00",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "uid": 501,
+  "attempts": [
+    {
+      "command": [
+        "/usr/sbin/purge"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Unable to purge disk buffers: Operation not permitted\n"
+    },
+    {
+      "command": [
+        "sudo",
+        "-n",
+        "/usr/sbin/purge"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "sudo: a password is required\n"
+    }
+  ],
+  "available": false,
+  "samples": []
+}

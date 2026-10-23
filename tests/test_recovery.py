@@ -16,7 +16,8 @@ from pathlib import Path
 from filekeeper.core import quarantine, restore, scan
 from filekeeper import operations
 mode, fault, target = sys.argv[1:]
-link, unlink, save = os.link, Path.unlink, operations._save
+link, unlink, sync, save = os.link, Path.unlink, operations._sync, operations._save
+saves = 0
 
 def broken_link(*args, **kwargs):
     result = link(*args, **kwargs)
@@ -29,12 +30,25 @@ def broken_unlink(path, *args, **kwargs):
         os._exit(91)
     return result
 
-def broken_save(run, data):
-    save(run, data)
-    if fault == "checkpoint" and any(e["state"] == "linked" for e in data["entries"]):
+def broken_sync(directory):
+    sync(directory)
+    if fault == "destination-sync" and Path(directory).name == "files":
         os._exit(91)
+    if fault == "destination-sync" and mode == "restore" and Path(directory).name != "files":
+        run = Path(target)
+        if any((run / "files").iterdir()) and any((run.parent.parent / name).exists() for name in ("b", "c")):
+            os._exit(91)
 
-os.link, Path.unlink, operations._save = broken_link, broken_unlink, broken_save
+def broken_save(run, data):
+    global saves
+    saves += 1
+    start = 2 if mode == "cleanup" else 1
+    boundary = "start" if saves == start else "end" if saves == start + 1 else "initial"
+    if fault == boundary + "-before": os._exit(91)
+    save(run, data)
+    if fault == boundary + "-after": os._exit(91)
+
+os.link, Path.unlink, operations._sync, operations._save = broken_link, broken_unlink, broken_sync, broken_save
 if mode == "cleanup": quarantine(scan(target))
 else: restore(target)
 '''
@@ -55,9 +69,46 @@ class RecoveryTests(unittest.TestCase):
     def run_path(self, root):
         return next(path for path in (root / ".filekeeper-trash").iterdir() if path.is_dir())
 
+    def test_manifest_serialization_is_linear(self):
+        from filekeeper import operations
+        sizes = {"quarantine": [], "restore": []}
+        for count in (8, 16):
+            root = self.root / str(count)
+            root.mkdir()
+            for index in range(count + 1):
+                (root / f"{index:04d}").write_bytes(b"duplicate payload")
+            written = []
+            save = operations._save
+            def measured(run, data):
+                written.append(len(json.dumps(data)))
+                return save(run, data)
+            with patch.object(operations, "_save", measured):
+                run = quarantine(scan(root))
+            sizes["quarantine"].append(sum(written))
+            written.clear()
+            with patch.object(operations, "_save", measured):
+                self.assertEqual(restore(run), count)
+            sizes["restore"].append(sum(written))
+        for direction, amounts in sizes.items():
+            with self.subTest(direction=direction):
+                self.assertLess(amounts[1], amounts[0] * 2.5)
+
+    def test_completed_run_symlink_does_not_block_unrelated_cleanup(self):
+        run = quarantine(self.setup_files(self.root))
+        (self.root / "a").unlink()
+        (self.root / "a").symlink_to(self.root / "elsewhere")
+        for name in ("x", "y"):
+            (self.root / name).write_bytes(b"new duplicate")
+        self.assertIsNotNone(quarantine(scan(self.root)))
+        with self.assertRaises(SafetyError):
+            restore(run)
+
     def test_process_death_at_each_move_boundary_is_recoverable(self):
         for mode in ("cleanup", "restore"):
-            for fault in ("link", "checkpoint", "unlink"):
+            for fault in ("link", "destination-sync", "unlink", "initial-after",
+                          "start-before", "start-after", "end-before", "end-after"):
+                if mode == "restore" and fault.startswith("initial-"):
+                    continue
                 with self.subTest(mode=mode, fault=fault):
                     root = self.root / f"{mode}-{fault}"
                     report = self.setup_files(root)
@@ -75,6 +126,28 @@ class RecoveryTests(unittest.TestCase):
                     self.assertEqual(restore(run), 0)
                     for name in ("a", "b", "c"):
                         self.assertEqual((root / name).read_bytes(), b"matching content")
+
+    def test_interrupted_status_reports_coarse_checkpoint_and_actual_locations(self):
+        self.setup_files(self.root)
+        child = subprocess.run([sys.executable, "-c", CRASH_WORKER, "cleanup", "unlink", str(self.root)])
+        self.assertEqual(child.returncode, 91)
+        report = status(self.run_path(self.root))
+        self.assertEqual(report["phase"], "quarantining")
+        self.assertEqual(report["entries"][0]["checkpoint"], "planned")
+        self.assertFalse(report["entries"][0]["original_exists"])
+        self.assertTrue(report["entries"][0]["quarantine_exists"])
+        self.assertEqual(resume(self.run_path(self.root)), 1)
+
+    def test_completed_restored_original_symlink_does_not_block_cleanup(self):
+        run = quarantine(self.setup_files(self.root))
+        restore(run)
+        (self.root / "b").unlink()
+        (self.root / "b").symlink_to(self.root / "missing")
+        for name in ("x", "y"):
+            (self.root / name).write_bytes(b"new content")
+        self.assertIsNotNone(quarantine(scan(self.root)))
+        with self.assertRaises(SafetyError):
+            restore(run)
 
     def test_restore_can_reverse_half_linked_quarantine(self):
         report = self.setup_files(self.root)
@@ -127,6 +200,27 @@ class RecoveryTests(unittest.TestCase):
         path.write_text(json.dumps(data))
         self.assertEqual(restore(run), 2)
         self.assertEqual(json.loads(path.read_text())["version"], 2)
+
+    def test_v2_manifest_without_verification_policy_remains_recoverable(self):
+        run = quarantine(self.setup_files(self.root))
+        path = run / "manifest.json"
+        data = json.loads(path.read_text())
+        data.pop("verify_bytes")
+        path.write_text(json.dumps(data))
+        self.assertEqual(resume(run), 0)
+        self.assertEqual(restore(run), 2)
+
+    def test_completed_manifest_still_requires_safe_path_syntax(self):
+        run = quarantine(self.setup_files(self.root))
+        path = run / "manifest.json"
+        data = json.loads(path.read_text())
+        data["entries"][0]["original"] = "../outside"
+        path.write_text(json.dumps(data))
+        for name in ("x", "y"):
+            (self.root / name).write_bytes(b"new duplicate")
+        with self.assertRaises(SafetyError):
+            quarantine(scan(self.root))
+        self.assertTrue((self.root / "y").exists())
 
     def test_failed_checkpoint_leaves_previous_valid_manifest(self):
         from filekeeper.operations import _save

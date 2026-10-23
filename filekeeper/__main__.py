@@ -15,6 +15,7 @@ def main(argv=None):
         command.add_argument("--json", action="store_true", help="Print a machine-readable report")
         command.add_argument("--cache", metavar="PATH", help="Opt in to a persistent SQLite hash cache")
         if name == "clean":
+            command.add_argument("--verify-bytes", action="store_true", help="Compare duplicate bytes with the retained copy before moving")
             command.add_argument("--apply", action="store_true", help="Move duplicates to quarantine")
     for name in ("restore", "resume", "status"):
         command = commands.add_parser(name)
@@ -32,7 +33,7 @@ def main(argv=None):
             return 0
         report = scan(args.folder, cache_path=args.cache)
         if args.command == "clean" and args.apply:
-            run = quarantine(report)
+            run = quarantine(report, verify_bytes=args.verify_bytes)
             report["quarantine_run"] = str(run) if run else None
         if args.json:
             print(json.dumps(report, indent=2))

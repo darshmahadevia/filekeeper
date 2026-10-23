@@ -1,0 +1,220 @@
+Command: python3 -m benchmarks.profile_scan
+Diagnostic cProfile runs only; excluded from timing samples.
+
+small-files duplicate-heavy hash-none
+{"bytes_hashed": 81920000, "cache_hits": 0, "duplicate_bytes": 40960000, "duplicate_groups": 10000, "errors": 0, "files_hashed": 20000, "files_scanned": 20000, "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95"}
+         16626002 function calls (16125999 primitive calls) in 4.392 seconds
+
+   Ordered by: cumulative time
+   List reduced from 97 to 18 due to restriction <18>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.005    0.005    4.392    4.392 core.py:12(scan)
+        1    0.087    0.087    4.387    4.387 core.py:27(_scan)
+    20000    0.043    0.000    1.861    0.000 fs.py:37(safe_path)
+    20000    0.060    0.000    1.149    0.000 pathlib.py:663(relative_to)
+   380204    0.124    0.000    0.867    0.000 pathlib.py:437(__str__)
+    20001    0.013    0.000    0.830    0.000 pathlib.py:1228(resolve)
+   300000    0.051    0.000    0.819    0.000 <frozen _collections_abc>:1022(__iter__)
+   260202    0.090    0.000    0.811    0.000 pathlib.py:551(drive)
+   260000    0.113    0.000    0.767    0.000 pathlib.py:277(__getitem__)
+    40000    0.032    0.000    0.765    0.000 pathlib.py:690(is_relative_to)
+    20000    0.056    0.000    0.735    0.000 fs.py:21(digest)
+   180202    0.090    0.000    0.721    0.000 pathlib.py:407(_load_parts)
+   160201    0.021    0.000    0.715    0.000 pathlib.py:835(stat)
+   160201    0.262    0.000    0.693    0.000 {built-in method posix.stat}
+    20001    0.012    0.000    0.632    0.000 <frozen posixpath>:423(realpath)
+   400201    0.144    0.000    0.632    0.000 pathlib.py:380(with_segments)
+20002/20001    0.120    0.000    0.588    0.000 <frozen posixpath>:432(_joinrealpath)
+   140200    0.022    0.000    0.586    0.000 pathlib.py:842(lstat)
+
+
+         16626002 function calls (16125999 primitive calls) in 4.392 seconds
+
+   Ordered by: internal time
+   List reduced from 97 to 18 due to restriction <18>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    20000    0.382    0.000    0.387    0.000 {built-in method posix.open}
+   180202    0.272    0.000    0.512    0.000 pathlib.py:387(_parse_path)
+   160201    0.262    0.000    0.693    0.000 {built-in method posix.stat}
+   200209    0.211    0.000    0.211    0.000 {built-in method posix.lstat}
+   440402    0.193    0.000    0.320    0.000 pathlib.py:358(__init__)
+   280410    0.169    0.000    0.302    0.000 <frozen posixpath>:71(join)
+   400201    0.144    0.000    0.632    0.000 pathlib.py:380(with_segments)
+   380204    0.124    0.000    0.867    0.000 pathlib.py:437(__str__)
+20002/20001    0.120    0.000    0.588    0.000 <frozen posixpath>:432(_joinrealpath)
+  1341815    0.119    0.000    0.119    0.000 {built-in method sys.intern}
+   440402    0.118    0.000    0.438    0.000 pathlib.py:1157(__init__)
+  1841821    0.117    0.000    0.117    0.000 {built-in method builtins.isinstance}
+   260000    0.113    0.000    0.767    0.000 pathlib.py:277(__getitem__)
+1420405/920405    0.109    0.000    0.155    0.000 {built-in method builtins.len}
+   260000    0.099    0.000    0.450    0.000 pathlib.py:484(_str_normcase)
+   260202    0.090    0.000    0.811    0.000 pathlib.py:551(drive)
+   180202    0.090    0.000    0.721    0.000 pathlib.py:407(_load_parts)
+        1    0.087    0.087    4.387    4.387 core.py:27(_scan)
+
+
+
+small-files duplicate-heavy hash-populated
+{"bytes_hashed": 0, "cache_hits": 20000, "duplicate_bytes": 40960000, "duplicate_groups": 10000, "errors": 0, "files_hashed": 0, "files_scanned": 20000, "result_digest": "d0ee931ceb7bf344e3bc071b74548d5b7859a47432a403604b28e7949591dc95"}
+         17526985 function calls (17026981 primitive calls) in 4.041 seconds
+
+   Ordered by: cumulative time
+   List reduced from 113 to 18 due to restriction <18>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.005    0.005    4.041    4.041 core.py:12(scan)
+        1    0.075    0.075    4.035    4.035 core.py:27(_scan)
+    20000    0.043    0.000    1.878    0.000 fs.py:37(safe_path)
+    20000    0.060    0.000    1.157    0.000 pathlib.py:663(relative_to)
+   340235    0.122    0.000    0.872    0.000 pathlib.py:437(__str__)
+    20006    0.013    0.000    0.841    0.000 pathlib.py:1228(resolve)
+   300000    0.051    0.000    0.824    0.000 <frozen _collections_abc>:1022(__iter__)
+   260215    0.092    0.000    0.821    0.000 pathlib.py:551(drive)
+   260000    0.113    0.000    0.773    0.000 pathlib.py:277(__getitem__)
+    40000    0.031    0.000    0.768    0.000 pathlib.py:690(is_relative_to)
+   180213    0.094    0.000    0.729    0.000 pathlib.py:407(_load_parts)
+   120212    0.018    0.000    0.643    0.000 pathlib.py:835(stat)
+    20006    0.012    0.000    0.642    0.000 <frozen posixpath>:423(realpath)
+   400209    0.145    0.000    0.635    0.000 pathlib.py:380(with_segments)
+   120212    0.203    0.000    0.626    0.000 {built-in method posix.stat}
+20008/20006    0.120    0.000    0.598    0.000 <frozen posixpath>:432(_joinrealpath)
+   180213    0.276    0.000    0.516    0.000 pathlib.py:387(_parse_path)
+   240002    0.072    0.000    0.508    0.000 pathlib.py:420(_from_parsed_parts)
+
+
+         17526985 function calls (17026981 primitive calls) in 4.041 seconds
+
+   Ordered by: internal time
+   List reduced from 113 to 18 due to restriction <18>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+   180213    0.276    0.000    0.516    0.000 pathlib.py:387(_parse_path)
+   200249    0.221    0.000    0.221    0.000 {built-in method posix.lstat}
+   120212    0.203    0.000    0.626    0.000 {built-in method posix.stat}
+   440415    0.193    0.000    0.321    0.000 pathlib.py:358(__init__)
+   280452    0.170    0.000    0.302    0.000 <frozen posixpath>:71(join)
+   400209    0.145    0.000    0.635    0.000 pathlib.py:380(with_segments)
+   340235    0.122    0.000    0.872    0.000 pathlib.py:437(__str__)
+  1881918    0.121    0.000    0.121    0.000 {built-in method builtins.isinstance}
+20008/20006    0.120    0.000    0.598    0.000 <frozen posixpath>:432(_joinrealpath)
+  1341901    0.119    0.000    0.119    0.000 {built-in method sys.intern}
+    20005    0.119    0.000    0.119    0.000 {method 'execute' of 'sqlite3.Connection' objects}
+   440415    0.118    0.000    0.439    0.000 pathlib.py:1157(__init__)
+   260000    0.113    0.000    0.773    0.000 pathlib.py:277(__getitem__)
+1440427/940427    0.111    0.000    0.159    0.000 {built-in method builtins.len}
+   260008    0.100    0.000    0.458    0.000 pathlib.py:484(_str_normcase)
+   180213    0.094    0.000    0.729    0.000 pathlib.py:407(_load_parts)
+   260215    0.092    0.000    0.821    0.000 pathlib.py:551(drive)
+        1    0.075    0.075    4.035    4.035 core.py:27(_scan)
+
+
+
+balanced duplicate-heavy hash-none
+{"bytes_hashed": 2147483648, "cache_hits": 0, "duplicate_bytes": 1073741824, "duplicate_groups": 1024, "errors": 0, "files_hashed": 2048, "files_scanned": 2048, "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e"}
+         1702725 function calls (1651522 primitive calls) in 1.213 seconds
+
+   Ordered by: cumulative time
+   List reduced from 97 to 18 due to restriction <18>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.001    0.001    1.213    1.213 core.py:12(scan)
+        1    0.009    0.009    1.212    1.212 core.py:27(_scan)
+     2048    0.006    0.000    0.844    0.000 fs.py:21(digest)
+     2048    0.672    0.000    0.672    0.000 {method 'update' of '_hashlib.HASH' objects}
+     2048    0.004    0.000    0.188    0.000 fs.py:37(safe_path)
+     4096    0.001    0.000    0.118    0.000 fs.py:30(<lambda>)
+     4096    0.117    0.000    0.117    0.000 {method 'read' of '_io.BufferedReader' objects}
+     2048    0.007    0.000    0.116    0.000 pathlib.py:663(relative_to)
+    38937    0.012    0.000    0.087    0.000 pathlib.py:437(__str__)
+     2049    0.001    0.000    0.084    0.000 pathlib.py:1228(resolve)
+    26647    0.009    0.000    0.082    0.000 pathlib.py:551(drive)
+    30720    0.005    0.000    0.081    0.000 <frozen _collections_abc>:1022(__iter__)
+     4096    0.003    0.000    0.077    0.000 pathlib.py:690(is_relative_to)
+    26624    0.011    0.000    0.076    0.000 pathlib.py:277(__getitem__)
+    18455    0.009    0.000    0.073    0.000 pathlib.py:407(_load_parts)
+    16406    0.002    0.000    0.072    0.000 pathlib.py:835(stat)
+    16406    0.027    0.000    0.070    0.000 {built-in method posix.stat}
+     2049    0.001    0.000    0.064    0.000 <frozen posixpath>:423(realpath)
+
+
+         1702725 function calls (1651522 primitive calls) in 1.213 seconds
+
+   Ordered by: internal time
+   List reduced from 97 to 18 due to restriction <18>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     2048    0.672    0.000    0.672    0.000 {method 'update' of '_hashlib.HASH' objects}
+     4096    0.117    0.000    0.117    0.000 {method 'read' of '_io.BufferedReader' objects}
+    18455    0.027    0.000    0.052    0.000 pathlib.py:387(_parse_path)
+    16406    0.027    0.000    0.070    0.000 {built-in method posix.stat}
+     2048    0.026    0.000    0.026    0.000 {built-in method posix.open}
+    20510    0.021    0.000    0.021    0.000 {built-in method posix.lstat}
+    45100    0.019    0.000    0.032    0.000 pathlib.py:358(__init__)
+    28724    0.017    0.000    0.031    0.000 <frozen posixpath>:71(join)
+    40982    0.014    0.000    0.063    0.000 pathlib.py:380(with_segments)
+    38937    0.012    0.000    0.087    0.000 pathlib.py:437(__str__)
+   137420    0.012    0.000    0.012    0.000 {built-in method sys.intern}
+2050/2049    0.012    0.000    0.059    0.000 <frozen posixpath>:432(_joinrealpath)
+   188626    0.012    0.000    0.012    0.000 {built-in method builtins.isinstance}
+    45100    0.012    0.000    0.044    0.000 pathlib.py:1157(__init__)
+    26624    0.011    0.000    0.076    0.000 pathlib.py:277(__getitem__)
+145455/94255    0.011    0.000    0.015    0.000 {built-in method builtins.len}
+    26624    0.010    0.000    0.046    0.000 pathlib.py:484(_str_normcase)
+    26647    0.009    0.000    0.082    0.000 pathlib.py:551(drive)
+
+
+
+balanced duplicate-heavy hash-populated
+{"bytes_hashed": 0, "cache_hits": 2048, "duplicate_bytes": 1073741824, "duplicate_groups": 1024, "errors": 0, "files_hashed": 0, "files_scanned": 2048, "result_digest": "e956c8dd0b80d87ee271ac7974db1a3368d6c89f41e83d8dbe3334cfa038a87e"}
+         1795868 function calls (1744664 primitive calls) in 0.406 seconds
+
+   Ordered by: cumulative time
+   List reduced from 113 to 18 due to restriction <18>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.406    0.406 core.py:12(scan)
+        1    0.008    0.008    0.405    0.405 core.py:27(_scan)
+     2048    0.004    0.000    0.189    0.000 fs.py:37(safe_path)
+     2048    0.006    0.000    0.117    0.000 pathlib.py:663(relative_to)
+    34872    0.012    0.000    0.088    0.000 pathlib.py:437(__str__)
+     2054    0.001    0.000    0.084    0.000 pathlib.py:1228(resolve)
+    30720    0.005    0.000    0.083    0.000 <frozen _collections_abc>:1022(__iter__)
+    26660    0.009    0.000    0.082    0.000 pathlib.py:551(drive)
+    26624    0.012    0.000    0.078    0.000 pathlib.py:277(__getitem__)
+     4096    0.003    0.000    0.078    0.000 pathlib.py:690(is_relative_to)
+    18466    0.009    0.000    0.073    0.000 pathlib.py:407(_load_parts)
+    12321    0.002    0.000    0.065    0.000 pathlib.py:835(stat)
+    40990    0.015    0.000    0.064    0.000 pathlib.py:380(with_segments)
+     2054    0.001    0.000    0.064    0.000 <frozen posixpath>:423(realpath)
+    12321    0.020    0.000    0.063    0.000 {built-in method posix.stat}
+2056/2054    0.012    0.000    0.059    0.000 <frozen posixpath>:432(_joinrealpath)
+    18466    0.028    0.000    0.052    0.000 pathlib.py:387(_parse_path)
+    10266    0.002    0.000    0.051    0.000 pathlib.py:842(lstat)
+
+
+         1795868 function calls (1744664 primitive calls) in 0.406 seconds
+
+   Ordered by: internal time
+   List reduced from 113 to 18 due to restriction <18>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    18466    0.028    0.000    0.052    0.000 pathlib.py:387(_parse_path)
+    20550    0.021    0.000    0.021    0.000 {built-in method posix.lstat}
+    12321    0.020    0.000    0.063    0.000 {built-in method posix.stat}
+    45113    0.020    0.000    0.033    0.000 pathlib.py:358(__init__)
+    28766    0.017    0.000    0.031    0.000 <frozen posixpath>:71(join)
+    40990    0.015    0.000    0.064    0.000 pathlib.py:380(with_segments)
+    34872    0.012    0.000    0.088    0.000 pathlib.py:437(__str__)
+   192819    0.012    0.000    0.012    0.000 {built-in method builtins.isinstance}
+   137506    0.012    0.000    0.012    0.000 {built-in method sys.intern}
+2056/2054    0.012    0.000    0.059    0.000 <frozen posixpath>:432(_joinrealpath)
+    45113    0.012    0.000    0.045    0.000 pathlib.py:1157(__init__)
+     2053    0.012    0.000    0.012    0.000 {method 'execute' of 'sqlite3.Connection' objects}
+    26624    0.012    0.000    0.078    0.000 pathlib.py:277(__getitem__)
+147525/96325    0.011    0.000    0.016    0.000 {built-in method builtins.len}
+    26632    0.010    0.000    0.046    0.000 pathlib.py:484(_str_normcase)
+    26660    0.009    0.000    0.082    0.000 pathlib.py:551(drive)
+    18466    0.009    0.000    0.073    0.000 pathlib.py:407(_load_parts)
+        1    0.008    0.008    0.405    0.405 core.py:27(_scan)

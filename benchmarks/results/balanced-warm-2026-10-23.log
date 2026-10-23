@@ -1,0 +1,13 @@
+COMMAND /Users/darshm/.pyenv/versions/3.12.12/bin/python3 -m benchmarks.run --scale balanced --repeats 5 --os-cache warm --output benchmarks/results/balanced-warm-2026-10-23.json
+unique-sizes
+  os-warm/hash-none            0.016135s [0.015961, 0.016570]  0 bytes hashed  25.1 MiB peak RSS
+  os-warm/hash-empty           0.017823s [0.017336, 0.019411]  0 bytes hashed  25.7 MiB peak RSS
+  os-warm/hash-populated       0.017221s [0.016930, 0.017796]  0 bytes hashed  25.8 MiB peak RSS
+duplicate-heavy
+  os-warm/hash-none            0.985738s [0.971971, 1.021319]  2,147,483,648 bytes hashed  26.3 MiB peak RSS
+  os-warm/hash-empty           1.011657s [0.984239, 1.048937]  2,147,483,648 bytes hashed  27.5 MiB peak RSS
+  os-warm/hash-populated       0.165249s [0.161861, 0.172424]  0 bytes hashed  27.6 MiB peak RSS
+mixed
+  os-warm/hash-none            0.501720s [0.494835, 0.521850]  1,073,741,824 bytes hashed  26.3 MiB peak RSS
+  os-warm/hash-empty           0.504148s [0.501451, 0.535895]  1,073,741,824 bytes hashed  26.2 MiB peak RSS
+  os-warm/hash-populated       0.091182s [0.087820, 0.095376]  0 bytes hashed  26.0 MiB peak RSS
